@@ -10,11 +10,16 @@ Two candidates (named properties such as `document.foo` are out of scope):
    `HTMLDocument.name` are "Document", navigated XML and SVG documents stop being `XMLDocument`, and
    every document, including `XMLDocument`s from DOMParser, XHR or `createDocument()`, is
    `instanceof HTMLDocument`.
+3. Firefox makes navigated XHTML documents `XMLDocument`, as Chrome and Safari do (the reverse of
+   1).
 
 Current behavior per document type, in the spec, Firefox Nightly 162 and Chrome Canary 159:
 [browsers.md](browsers.md). The two browsers differ only for navigated XHTML documents.
 
 ## Summary
+
+Candidates 1 and 3 each make the browsers match on XHTML; neither breaks pages as far as I can
+tell. Candidate 3 needs changes to Firefox's own features.
 
 Candidate 1 looks safe. XHTML is rare: 326 mobile and 270 desktop root pages in HTTP Archive serve
 it (0.002% of mobile root pages), and 16 of 256,012 HTML responses in Common Crawl. On 300 sampled
@@ -47,6 +52,18 @@ These follow from the spec text, not from an implementation bug: fixing them in 
 keeping a distinct `HTMLDocument` interface (tag and name) for HTML documents, as whatwg/html#4792
 proposes. Keeping `HTMLDocument` for text/html avoids all three. Candidate 1 alone is enough to
 make Chrome and Safari match Firefox.
+
+Candidate 3 also looks web-compatible. It is the same diff as the B1 run, reversed: Chrome and Safari
+already give XHTML pages `XMLDocument`, none of the 248 assessable XML-typed pages in that run (150
+sampled were XHTML) differed visibly between the two, and the only reads that change (8 pages, jQuery `type()` and Prototype.js
+`Object.isString`) return the same result for either tag. The 10k sample has no XHTML subframes.
+What would break is Firefox's own: Reader View is offered only when `HTMLDocument.isInstance(doc)`
+([Readerable.js](https://github.com/mozilla-firefox/firefox/blob/b16e2e7707150c623c413326c14c5111f930e920/toolkit/components/reader/Readerable.js#L31),
+[AboutReaderChild.sys.mjs](https://github.com/mozilla-firefox/firefox/blob/b16e2e7707150c623c413326c14c5111f930e920/browser/actors/AboutReaderChild.sys.mjs#L168)), and thumbnails skip
+`XMLDocument`s ([PageThumbUtils.sys.mjs](https://github.com/mozilla-firefox/firefox/blob/b16e2e7707150c623c413326c14c5111f930e920/toolkit/components/thumbnails/PageThumbUtils.sys.mjs#L351)),
+so XHTML pages would lose both unless those checks change. XHTML documents would also lose
+`HTMLDocument`'s named getter (out of scope here; Chrome and Safari lack it on XHTML too). Page
+code that only runs in Firefox, and Firefox extensions, weren't traced.
 
 ## Scope
 
@@ -112,7 +129,8 @@ committing images.
 
 The traces (`trace_summary.py`: `trace-pages.csv`, `trace-groups.csv` per run) show B1 changes
 only on XML-typed pages, and only through jQuery and Prototype.js type helpers. The B2 groups were
-code-reviewed: [code-review.md](code-review.md). The avplayer schema error also appeared on 3
+code-reviewed: [code-review.md](code-review.md). The B1 groups are also candidate 3's changed reads
+(Firefox today matches B1 on XHTML, candidate 3 matches A). The avplayer schema error also appeared on 3
 targeted pages, where the player sat behind a consent dialog.
 
 ## Not covered
@@ -123,8 +141,9 @@ targeted pages, where the player sat behind a consent dialog.
   frame documents when they're accessed).
 - Error-stack strings: V8 names frames like `HTMLDocument.<anonymous>`, which a few error filters
   match. The emulation can't change that.
-- Firefox wasn't run on the XHTML sample: it already ships candidate 1, and B1 found nothing to
-  confirm.
+- Firefox wasn't run on the XHTML sample, for candidate 1 or 3: it already ships candidate 1, B1
+  found nothing to confirm, and the Chrome trace stands in for candidate 3. So Firefox-only page
+  code (UA- or Gecko-sniffed branches) and Firefox extensions on XHTML pages weren't observed.
 - Live pages change, so reruns won't match exactly. Some XHTML-stratum pages now serve text/html.
 
 ## Query bytes
