@@ -1,6 +1,6 @@
 # Compat impact of the document interfaces in whatwg/html#4792
 
-Two candidates (named properties such as `document.foo` are out of scope):
+Three candidates (named properties such as `document.foo` are out of scope):
 
 1. Chrome and Safari make navigated `application/xhtml+xml` documents `HTMLDocument`, as Firefox
    does. Today they are `XMLDocument`.
@@ -50,7 +50,7 @@ of mobile root pages). Targeted loads of risky code found:
 
 These follow from the spec text, not from an implementation bug: fixing them in the spec means
 keeping a distinct `HTMLDocument` interface (tag and name) for HTML documents, as whatwg/html#4792
-proposes. Keeping `HTMLDocument` for text/html avoids all three. Candidate 1 alone is enough to
+proposes. Keeping `HTMLDocument` for text/html avoids all three breakages. Candidate 1 alone is enough to
 make Chrome and Safari match Firefox.
 
 Candidate 3 also looks web-compatible. It is the same diff as the B1 run, reversed: Chrome and Safari
@@ -93,8 +93,9 @@ code that only runs in Firefox, and Firefox extensions, weren't traced.
 | Root pages loading AudioEye (takes its `instanceof XMLDocument` path on XHTML) | 37,622 | 39,694 |
 
 None of the 1,055 XHTML-served pages (root and non-root) loads AudioEye, insuit or avplayer.
-AudioEye matters for both candidates: on a navigated XHTML document it uses `innerHTML` instead of
-its XML-safe path once the document stops being `XMLDocument`.
+AudioEye matters for every candidate: it takes its XML-safe path only for `XMLDocument`s, so on a
+navigated XHTML document it switches to `innerHTML` under candidates 1 and 2, and to the XML-safe
+path in Firefox under candidate 3.
 
 - Blink's `kXMLDocument` counter (counted for XML documents parsed with a frame view) hits 487,958
   mobile root pages ([counts](queries/xmldoc_features_counts.csv)), against 0.14–0.23% of page loads

@@ -24,4 +24,4 @@ the `Document` interface object, so its name is "Document", every document is
 `instanceof HTMLDocument`, and an HTML document's tag is `[object Document]`.
 
 `instanceof` across realms (parent page checking an iframe's document against its own constructors)
-is false in both browsers and under both candidates; the toString tag works across realms.
+is false in both browsers and under all three candidates; the toString tag works across realms.
