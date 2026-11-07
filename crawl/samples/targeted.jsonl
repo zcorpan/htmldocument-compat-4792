@@ -1,0 +1,155 @@
+{"page": "https://ar.search.yahoo.com/", "rank": "10000", "client": "desktop", "patterns": ["indexOf_HTMLDocument"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://assure.ameli.fr/PortailAS/appmanager/PortailAS/assure?_nfpb=true&_pageLabel=as_accueil_page", "rank": "5000", "client": "desktop", "patterns": ["XMLDocument_tag"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://au.search.yahoo.com/", "rank": "10000", "client": "desktop", "patterns": ["indexOf_HTMLDocument"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://author.today/work/659238", "rank": "5000", "client": "desktop", "patterns": ["tag_eq_no_fallback"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://baike.baidu.com/", "rank": "5000", "client": "desktop", "patterns": ["ctor_name_eq"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://br.search.yahoo.com/search?p=Inc%C3%AAndios+no+Amazonas&fr=sfp-tts&fr2=p%3As%2Cv%3Asfp%2Cm%3Atn%2Cct%3Aall%2Cstl%3Atxt%2Ckt%3Aorg", "rank": "5000", "client": "desktop", "patterns": ["indexOf_HTMLDocument"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://emea.search.yahoo.com/", "rank": "10000", "client": "desktop", "patterns": ["indexOf_HTMLDocument"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://epaper.gujaratsamachar.com/", "rank": "10000", "client": "desktop", "patterns": ["isType_HTMLDocument"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://epaper.lokmat.com/main-editions/Mumbai%20Main/2026-10-14/1", "rank": "5000", "client": "desktop", "patterns": ["isType_HTMLDocument"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://fortune.com/2026/10/14/kalshi-co-founder-says-no-vps-has-been-key-to-companys-explosive-growth/", "rank": "10000", "client": "desktop", "patterns": ["isHtmlDocument_toString", "tag_eq_no_fallback"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://id.search.yahoo.com/", "rank": "5000", "client": "desktop", "patterns": ["indexOf_HTMLDocument"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://in.search.yahoo.com/search?p=CJP+Leaders+Detained&fr=sfp-tts&fr2=p%3As%2Cv%3Asfp%2Cm%3Atn%2Cct%3Aall%2Cstl%3Atxt%2Ckt%3Aorg", "rank": "5000", "client": "desktop", "patterns": ["indexOf_HTMLDocument"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://it.search.yahoo.com/", "rank": "5000", "client": "desktop", "patterns": ["indexOf_HTMLDocument"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://litmir.club/", "rank": "10000", "client": "desktop", "patterns": ["ownerDocument_tag", "tag_eq_no_fallback"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://litmir.club/bd/?b=980207", "rank": "10000", "client": "desktop", "patterns": ["ownerDocument_tag", "tag_eq_no_fallback"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://m.magazineluiza.com.br/", "rank": "5000", "client": "desktop", "patterns": ["define_both", "proto_list"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://micuenta.infonavit.org.mx/", "rank": "10000", "client": "desktop", "patterns": ["doc_and_htmldoc_cookie", "list_name_members"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://nl.search.yahoo.com/", "rank": "10000", "client": "desktop", "patterns": ["indexOf_HTMLDocument"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://portal.seg-social.gob.es/", "rank": "5000", "client": "desktop", "patterns": ["type_map"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://racing.hkjc.com/zh-hk/local/page/racing-course", "rank": "5000", "client": "desktop", "patterns": ["ctor_name_eq"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://search.yahoo.com/", "rank": "1000", "client": "desktop", "patterns": ["indexOf_HTMLDocument"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://sede-tu.seg-social.gob.es/", "rank": "5000", "client": "desktop", "patterns": ["type_map"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://sede-tu.seg-social.gob.es/wps/portal/tussR/tuss/InicioRepresentanteNoApoderado", "rank": "5000", "client": "desktop", "patterns": ["type_map"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://sede.mjusticia.gob.es/", "rank": "10000", "client": "desktop", "patterns": ["type_map"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://sede.mjusticia.gob.es/informacion-ayuda", "rank": "10000", "client": "desktop", "patterns": ["type_map"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://sede.seg-social.gob.es/wps/portal/sede/sede/EmpresasyProfesionales/afiliacion+e+inscripcion/03afiliacion+e+inscripcion", "rank": "5000", "client": "desktop", "patterns": ["type_map"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://smn.conagua.gob.mx/pronosticos/pronosticossubmenu/pronostico-meteorologico-general", "rank": "10000", "client": "desktop", "patterns": ["XMLDocument_tag"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://temp-mail.org/", "rank": "5000", "client": "desktop", "patterns": ["ctor_name_eq"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://udn.com/news/story/6810/9814953?from=udn_ch2_menu_v2_main_index", "rank": "5000", "client": "desktop", "patterns": ["isType_HTMLDocument"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.aa.com/", "rank": "5000", "client": "desktop", "patterns": ["doc_and_htmldoc_cookie", "list_name_members"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.adobe.com/", "rank": "1000", "client": "desktop", "patterns": ["ctor_name_eq"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.astrosage.com/", "rank": "10000", "client": "desktop", "patterns": ["XMLDocument_tag"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.astrosage.com/horoscope/daily-horoscope-todays-horoscope.asp", "rank": "10000", "client": "desktop", "patterns": ["XMLDocument_tag"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.autotrader.com/", "rank": "10000", "client": "desktop", "patterns": ["instanceof_XMLDocument"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.avito.ru/", "rank": "1000", "client": "desktop", "patterns": ["ownerDocument_tag", "tag_eq_no_fallback"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.countryliving.com/shopping/antiques/a73891098/best-thrift-store-fall-decor-finds/", "rank": "10000", "client": "desktop", "patterns": ["isHtmlDocument_toString", "tag_eq_no_fallback"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.delish.com/cooking/recipe-ideas/a73946367/pumpkin-churros-recipe/", "rank": "10000", "client": "desktop", "patterns": ["isHtmlDocument_toString", "tag_eq_no_fallback"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.esquire.com/", "rank": "5000", "client": "desktop", "patterns": ["isHtmlDocument_toString", "tag_eq_no_fallback"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.esquire.com/style/mens-accessories/a74068412/jaden-smith-christian-louboutin/", "rank": "5000", "client": "desktop", "patterns": ["isHtmlDocument_toString", "tag_eq_no_fallback"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.falabella.com.pe/", "rank": "5000", "client": "desktop", "patterns": ["define_both", "proto_list"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.fedex.com/", "rank": "5000", "client": "desktop", "patterns": ["list_name_members"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.goodhousekeeping.com/entertainment/celebrity-news/a74081969/jessie-james-decker-podcast-children-parenting-rule-exclusive/", "rank": "5000", "client": "desktop", "patterns": ["isHtmlDocument_toString", "tag_eq_no_fallback"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.guitarcenter.com/", "rank": "10000", "client": "desktop", "patterns": ["doc_and_htmldoc_cookie", "instanceof_XMLDocument", "list_name_members"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.hk01.com/", "rank": "10000", "client": "desktop", "patterns": ["isType_HTMLDocument"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.hsn.com/shop/shoes/fa0045", "rank": "10000", "client": "desktop", "patterns": ["doc_and_htmldoc_cookie", "list_name_members"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.icici.bank.in/", "rank": "5000", "client": "desktop", "patterns": ["define_both", "proto_list"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.icici.bank.in/personal-banking/loans/personal-loan/apply", "rank": "5000", "client": "desktop", "patterns": ["define_both", "proto_list"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.intimissimi.com/", "rank": "10000", "client": "desktop", "patterns": ["instanceof_XMLDocument"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.maxpreps.com/news/kC8jkL1HpE6tq3Pnqm-yTA/high-school-football-david-gabriel-georges%2c-cj-cypher-headline-maxpreps-national-player-of-the-year-watch-list.htm", "rank": "5000", "client": "desktop", "patterns": ["instanceof_XMLDocument"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.menshealth.com/", "rank": "5000", "client": "desktop", "patterns": ["isHtmlDocument_toString", "tag_eq_no_fallback"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.menti.com/", "rank": "10000", "client": "desktop", "patterns": ["currentTarget_tag", "tag_eq_no_fallback"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.menti.com/policies", "rank": "10000", "client": "desktop", "patterns": ["currentTarget_tag", "tag_eq_no_fallback"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.merriam-webster.com/", "rank": "1000", "client": "desktop", "patterns": ["define_both", "proto_list"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.mexc.com/", "rank": "10000", "client": "desktop", "patterns": ["ctor_name_eq"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.mexc.com/rewards-hub", "rank": "10000", "client": "desktop", "patterns": ["ctor_name_eq"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.mybsn.com.my/", "rank": "5000", "client": "desktop", "patterns": ["XMLDocument_tag"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.mybsn.com.my/mybsn/reset/reset_password.do", "rank": "5000", "client": "desktop", "patterns": ["XMLDocument_tag"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.potterybarn.com/shop/furniture/all-in-stock-furniture/?cm_re=hphero-_-default-_-holiday1_instockfurn", "rank": "10000", "client": "desktop", "patterns": ["doc_and_htmldoc_cookie", "list_name_members"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.rei.com/member-thanks", "rank": "10000", "client": "desktop", "patterns": ["doc_and_htmldoc_cookie", "list_name_members"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.setn.com/news/1922994", "rank": "5000", "client": "desktop", "patterns": ["isType_HTMLDocument"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.smbc-card.com/", "rank": "10000", "client": "desktop", "patterns": ["doc_and_htmldoc_cookie", "list_name_members"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.sofi.com/", "rank": "10000", "client": "desktop", "patterns": ["define_both", "instanceof_XMLDocument", "proto_list"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.southwest.com/?clk=GNAVHOMELOGO", "rank": "5000", "client": "desktop", "patterns": ["doc_and_htmldoc_cookie", "list_name_members"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.tezenis.com/it/loyaltylanding/", "rank": "10000", "client": "desktop", "patterns": ["instanceof_XMLDocument"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.tuasaude.com/", "rank": "5000", "client": "desktop", "patterns": ["isType_HTMLDocument"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.unisa.ac.za/", "rank": "5000", "client": "desktop", "patterns": ["XMLDocument_tag"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.unisa.ac.za/sites/corporate/default/Research-&-Innovation/News-&-events/Articles/Seeing-beyond-the-horizon-Unisa-shapes-tomorrow-as-it-expands-its-research-outputs-significantly", "rank": "5000", "client": "desktop", "patterns": ["XMLDocument_tag"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.vogue.com/", "rank": "10000", "client": "desktop", "patterns": ["isHtmlDocument_toString", "tag_eq_no_fallback"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.vogue.com/article/dresses", "rank": "10000", "client": "desktop", "patterns": ["isHtmlDocument_toString", "tag_eq_no_fallback"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://www.womenshealthmag.com/health/a73929023/black-egg-donor-shortage-fertility/", "rank": "10000", "client": "desktop", "patterns": ["isHtmlDocument_toString", "tag_eq_no_fallback"], "stratum": "targeted-desktop", "stratum_size": 0}
+{"page": "https://acrobat.adobe.com/", "rank": "5000", "client": "mobile", "patterns": ["ctor_name_eq"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://assure.ameli.fr/", "rank": "5000", "client": "mobile", "patterns": ["XMLDocument_tag"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://br.search.yahoo.com/search?p=Pesquisa+eleitoral&fr=sfp-tts&fr2=p%3As%2Cv%3Asfp%2Cm%3Atn%2Cct%3Aall%2Cstl%3Atxt%2Ckt%3Aorg", "rank": "5000", "client": "mobile", "patterns": ["indexOf_HTMLDocument"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://cheezburger.com/47108613/the-kelly-clarkson-debacle-singer-tries-to-buy-an-expensive-item-at-a-small-business-shop-and-gets", "rank": "10000", "client": "mobile", "patterns": ["instanceof_XMLDocument"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://de.search.yahoo.com/preferences/preferences?pref_done=https%3A%2F%2Fde.search.yahoo.com%2F%3F&.bcrumb=dginXNvnPWF&sigpd=51GoxG4A9nbW", "rank": "5000", "client": "mobile", "patterns": ["indexOf_HTMLDocument"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://dshopping-3ple.docomo.ne.jp/", "rank": "10000", "client": "mobile", "patterns": ["define_both", "proto_list"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://emea.search.yahoo.com/", "rank": "10000", "client": "mobile", "patterns": ["indexOf_HTMLDocument"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://es.search.yahoo.com/", "rank": "5000", "client": "mobile", "patterns": ["indexOf_HTMLDocument"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://fr.search.yahoo.com/", "rank": "5000", "client": "mobile", "patterns": ["indexOf_HTMLDocument"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://gdz-raketa.ru/", "rank": "1000", "client": "mobile", "patterns": ["ownerDocument_tag", "tag_eq_no_fallback"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://gdz-raketa.ru/english/", "rank": "1000", "client": "mobile", "patterns": ["ownerDocument_tag", "tag_eq_no_fallback"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://gmgn.ai/", "rank": "10000", "client": "mobile", "patterns": ["ctor_name_eq"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://health.policybazaar.com/", "rank": "10000", "client": "mobile", "patterns": ["define_both", "proto_list"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://litmir.club/", "rank": "10000", "client": "mobile", "patterns": ["ownerDocument_tag", "tag_eq_no_fallback"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://litmir.club/bs/?g=sg366&hc=1&rs=5%7C1%7C0", "rank": "10000", "client": "mobile", "patterns": ["ownerDocument_tag", "tag_eq_no_fallback"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://m.avito.ru/", "rank": "1000", "client": "mobile", "patterns": ["ownerDocument_tag", "tag_eq_no_fallback"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://mobile.ghanaweb.com/GhanaHomePage/NewsArchive/Dr-Kwame-Nkrumah-s-son-is-dead-Report-2056749", "rank": "5000", "client": "mobile", "patterns": ["ctor_name_eq"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://modrinth.com/discover/mods", "rank": "5000", "client": "mobile", "patterns": ["ctor_name_eq"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://mx.search.yahoo.com/", "rank": "5000", "client": "mobile", "patterns": ["indexOf_HTMLDocument"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://nasional.kompas.com/read/2026/10/13/17535901/bos-travel-akui-fee-percepatan-haji-34-jemaah-capai-102000-dollar-as", "rank": "10000", "client": "mobile", "patterns": ["isType_HTMLDocument"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://news.ru/economics/mask-poteryal-status-trillionera-cherez-chetyre-dnya-posle-vozvrasheniya", "rank": "10000", "client": "mobile", "patterns": ["isType_HTMLDocument"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://portal.seg-social.gob.es/", "rank": "5000", "client": "mobile", "patterns": ["type_map"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://prochepetsk.ru/", "rank": "10000", "client": "mobile", "patterns": ["ownerDocument_tag", "tag_eq_no_fallback"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://scienceblog.com/becoming-a-man-a-chicago-program-built-on-cognitive-behavioral-therapy-cut-violent-crime-arrests-45-to-50-percent-across-two-randomized-trials-with-no-sign-the-gains-came-from-grit-or-mentoring/", "rank": "5000", "client": "mobile", "patterns": ["ctor_name_eq"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://sede-tu.seg-social.gob.es/", "rank": "5000", "client": "mobile", "patterns": ["type_map"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://sede-tu.seg-social.gob.es/wps/portal/tussR/tuss/Informacion/PoliticaCookies", "rank": "5000", "client": "mobile", "patterns": ["type_map"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://sede.mjusticia.gob.es/", "rank": "10000", "client": "mobile", "patterns": ["type_map"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://sede.mjusticia.gob.es/tramites", "rank": "10000", "client": "mobile", "patterns": ["type_map"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://sede.seg-social.gob.es/", "rank": "5000", "client": "mobile", "patterns": ["type_map"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://sede.seg-social.gob.es/wps/portal/sede/sede/EmpresasyProfesionales/afiliacion+e+inscripcion/03afiliacion+e+inscripcion", "rank": "5000", "client": "mobile", "patterns": ["type_map"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://sede.sepe.gob.es/", "rank": "5000", "client": "mobile", "patterns": ["type_map"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://sede.sepe.gob.es/portalSede/procedimientos-y-servicios/personas.html", "rank": "5000", "client": "mobile", "patterns": ["type_map"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://smn.conagua.gob.mx/pronosticos/pronosticossubmenu/pronostico-meteorologico-general", "rank": "10000", "client": "mobile", "patterns": ["XMLDocument_tag"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://sportowefakty.wp.pl/", "rank": "1000", "client": "mobile", "patterns": ["instanceof_XMLDocument"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://stock.adobe.com/", "rank": "5000", "client": "mobile", "patterns": ["ctor_name_eq"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://stock.adobe.com/ai-studio", "rank": "5000", "client": "mobile", "patterns": ["ctor_name_eq"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://time.is/North_Charleston", "rank": "10000", "client": "mobile", "patterns": ["instanceof_XMLDocument"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://toyota.jp/info/alphard-vellfire/campaign2026/?padid=from_tjptop_topmv_campaign", "rank": "10000", "client": "mobile", "patterns": ["doc_and_htmldoc_cookie", "list_name_members"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://u.3seq.com/", "rank": "10000", "client": "mobile", "patterns": ["wpmeteor"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://u.3seq.com/video/modablaj-guller-ve-gunahlar-episode-108/", "rank": "10000", "client": "mobile", "patterns": ["wpmeteor"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://vatandas.uyap.gov.tr/main/vatandas/giris.jsp", "rank": "10000", "client": "mobile", "patterns": ["instanceof_XMLDocument"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://vnexpress.net/4-gio-ha-thuy-nhip-cau-di-bo-3-400-tan-bac-qua-song-sai-gon-5132937.html", "rank": "1000", "client": "mobile", "patterns": ["isType_HTMLDocument"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.24h.com.vn/bong-da/video-bong-da-salzburg-ac-milan-sao-mai-toa-sang-bat-ngo-europa-league-c48a1803065.html", "rank": "1000", "client": "mobile", "patterns": ["isType_HTMLDocument"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.ad.nl/voetbal/psv-betaalt-de-prijs-voor-misser-ivan-perisic-en-gaat-nipt-onderuit-in-vermakelijk-duel-met-rb-leipzig~a6ab409e/", "rank": "1000", "client": "mobile", "patterns": ["define_both", "proto_list"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.astrosage.com/", "rank": "10000", "client": "mobile", "patterns": ["XMLDocument_tag"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.boticario.com.br/batalha-de-cupons/", "rank": "5000", "client": "mobile", "patterns": ["define_both", "proto_list"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.countryliving.com/food-drinks/salad-side-dish-recipes/a73654696/roasted-potato-fennel-salad/", "rank": "10000", "client": "mobile", "patterns": ["isHtmlDocument_toString", "tag_eq_no_fallback"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.delish.com/", "rank": "10000", "client": "mobile", "patterns": ["isHtmlDocument_toString", "tag_eq_no_fallback"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.delish.com/holiday-recipes/halloween/", "rank": "10000", "client": "mobile", "patterns": ["isHtmlDocument_toString", "tag_eq_no_fallback"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.destentor.nl/politiek/opeens-gonst-het-in-de-haagse-gangen-een-deal-over-rechts-kan-ook-al-zijn-de-eisen-fors~a94726c8/", "rank": "5000", "client": "mobile", "patterns": ["define_both", "proto_list"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.dlsite.com/", "rank": "1000", "client": "mobile", "patterns": ["define_both", "proto_list"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.dlsite.com/touch.html?locale=ja_JP", "rank": "1000", "client": "mobile", "patterns": ["define_both", "proto_list"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.expedia.com/", "rank": "5000", "client": "mobile", "patterns": ["doc_and_htmldoc_cookie", "list_name_members"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.guitarcenter.com/", "rank": "10000", "client": "mobile", "patterns": ["doc_and_htmldoc_cookie", "instanceof_XMLDocument", "list_name_members"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.guitarcenter.com/Beat-Lab.gc?icid=LP14740", "rank": "10000", "client": "mobile", "patterns": ["doc_and_htmldoc_cookie", "instanceof_XMLDocument", "list_name_members"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.harpersbazaar.com/", "rank": "5000", "client": "mobile", "patterns": ["isHtmlDocument_toString", "tag_eq_no_fallback"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.hk01.com/", "rank": "10000", "client": "mobile", "patterns": ["isType_HTMLDocument"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.hsn.com/shop/home-sweet-holidays/37821", "rank": "10000", "client": "mobile", "patterns": ["doc_and_htmldoc_cookie", "list_name_members"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.jcpenney.com/g/shops/shop-all-products?s1_deals_and_promotions=SALE&id=cat1007450013&cm_re=ZB-_-HOME-_-IB-_-GET-READY-WITH-US-_-SHOP-NOW", "rank": "5000", "client": "mobile", "patterns": ["doc_and_htmldoc_cookie", "list_name_members"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.jornada.com.mx/noticia/2026/10/13/estados/trasladan-a-7-detenidos-en-protesta-por-agua-en-guadalajara-a-juzgados-de-penal-de-puente-grande", "rank": "10000", "client": "mobile", "patterns": ["isType_HTMLDocument"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.kambimalayalamkathakal.com/", "rank": "10000", "client": "mobile", "patterns": ["wpmeteor"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.kambimalayalamkathakal.com/rejected-stories/", "rank": "10000", "client": "mobile", "patterns": ["wpmeteor"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.kia.com/us/en/hybrids", "rank": "5000", "client": "mobile", "patterns": ["instanceof_XMLDocument"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.kompas.com/tren/read/2026/10/14/145500365/industri-kejahatan-siber-dan-kerentanan-data-pribadi?source=kolom", "rank": "10000", "client": "mobile", "patterns": ["isType_HTMLDocument"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.kompasiana.com/emaqabut32754/6ace2409c925c41fc05772f9/the-power-of-dream-dari-remahan-rengginang-ke-impian", "rank": "10000", "client": "mobile", "patterns": ["isType_HTMLDocument"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.kroger.com/", "rank": "10000", "client": "mobile", "patterns": ["doc_and_htmldoc_cookie", "list_name_members"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.madhyamam.com/world/yemen-conflict-escalates-with-airstrike-in-sanaa-1563021", "rank": "10000", "client": "mobile", "patterns": ["isType_HTMLDocument"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.menti.com/", "rank": "10000", "client": "mobile", "patterns": ["currentTarget_tag", "tag_eq_no_fallback"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.menti.com/policies", "rank": "10000", "client": "mobile", "patterns": ["currentTarget_tag", "tag_eq_no_fallback"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.mexc.com/", "rank": "10000", "client": "mobile", "patterns": ["ctor_name_eq"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.mybsn.com.my/", "rank": "5000", "client": "mobile", "patterns": ["XMLDocument_tag"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.mybsn.com.my/mybsn/reset/reset_password.do", "rank": "5000", "client": "mobile", "patterns": ["XMLDocument_tag"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.officedepot.com/a/products/9551504/Custom-Wrapping-Paper/?promo_name=homepage&promo_id=homepage_test&promo_creative=custom_wrapping_paper_main_image_position", "rank": "10000", "client": "mobile", "patterns": ["doc_and_htmldoc_cookie", "instanceof_XMLDocument", "list_name_members"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.onlinekhabar.com/", "rank": "10000", "client": "mobile", "patterns": ["ctor_name_eq"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.semrush.com/signup/?src=main_banner&custom=ai-seo&redirect_to=%2Fseo%2F&trial=force", "rank": "10000", "client": "mobile", "patterns": ["define_both", "proto_list"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.sexyvideoindian.com/", "rank": "5000", "client": "mobile", "patterns": ["wpmeteor"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.sexyvideoindian.com/hot-beautiful-gf-ki-pink-chut-ki-chudai/", "rank": "5000", "client": "mobile", "patterns": ["wpmeteor"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.sodimac.cl/", "rank": "5000", "client": "mobile", "patterns": ["define_both", "proto_list"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.tamilkamaveri2.com/", "rank": "5000", "client": "mobile", "patterns": ["wpmeteor"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.tamilkamaveri2.com/submit-story/", "rank": "5000", "client": "mobile", "patterns": ["wpmeteor"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.unisa.ac.za/", "rank": "5000", "client": "mobile", "patterns": ["XMLDocument_tag"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.unisa.ac.za/sites/corporate/default/Research-&-Innovation/News-&-events/Articles/Seeing-beyond-the-horizon-Unisa-shapes-tomorrow-as-it-expands-its-research-outputs-significantly", "rank": "5000", "client": "mobile", "patterns": ["XMLDocument_tag"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.usatoday.com/story/news/politics/elections/2026/10/14/democrat-presidential-candidates-campaigns-heating-up-2028/92054721007/", "rank": "5000", "client": "mobile", "patterns": ["instanceof_XMLDocument"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.womenshealthmag.com/", "rank": "10000", "client": "mobile", "patterns": ["isHtmlDocument_toString", "tag_eq_no_fallback"], "stratum": "targeted-mobile", "stratum_size": 0}
+{"page": "https://www.ynet.co.il/", "rank": "5000", "client": "mobile", "patterns": ["instanceof_XMLDocument"], "stratum": "targeted-mobile", "stratum_size": 0}

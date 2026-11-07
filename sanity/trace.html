@@ -1,0 +1,26 @@
+<!doctype html>
+<title>trace test</title>
+<iframe src="x.xhtml"></iframe>
+<iframe src="x.xml"></iframe>
+<script>
+window.onload = () => {
+  const [fx, fm] = document.querySelectorAll('iframe');
+  const r = {};
+  r.instHTML = document instanceof HTMLDocument;
+  r.instXMLcross = fx.contentDocument instanceof XMLDocument;
+  r.instXMLsame = fx.contentWindow.eval('document instanceof XMLDocument');
+  r.tag = Object.prototype.toString.call(document);
+  r.tagX = String(fx.contentDocument);
+  r.tagM = Object.prototype.toString.call(fm.contentDocument);
+  r.ctor = document.constructor.name;
+  r.proto = Object.getPrototypeOf(document) === HTMLDocument.prototype;
+  r.dunder = document.__proto__ === HTMLDocument.prototype;
+  r.protoOfHP = Object.getPrototypeOf(HTMLDocument.prototype) === Document.prototype;
+  r.parsedXML = new DOMParser().parseFromString('<x/>', 'text/xml') instanceof HTMLDocument;
+  r.parsedHTMLtag = Object.prototype.toString.call(new DOMParser().parseFromString('', 'text/html'));
+  r.name = HTMLDocument.name;
+  HTMLDocument.prototype.myAdd = function () {};
+  Object.defineProperty(HTMLDocument.prototype, 'title2', { get() { return 1; }, configurable: true });
+  window.__results = r;
+};
+</script>
