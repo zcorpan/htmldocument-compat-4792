@@ -25,6 +25,13 @@ def visits(r):
         for fr in [v] + v.get('frames', []):
             t = fr.get('extra')
             if t:
+                # Pages with an Array.prototype.toJSON (Prototype.js) serialize nested arrays as strings.
+                for k in ('events', 'protoAdds'):
+                    if isinstance(t.get(k), str):
+                        try:
+                            t[k] = json.loads(t[k])
+                        except ValueError:
+                            t[k] = []
                 yield tag, t
 
 

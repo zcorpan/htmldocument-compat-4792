@@ -9,6 +9,7 @@
 # Usage: nsfw_check.py <out-dir>
 import csv, glob, json, os, re, sys, urllib.parse, urllib.request
 from PIL import Image
+Image.MAX_IMAGE_PIXELS = None  # full-page screenshots of very long or wide documents
 import ocr_check
 
 ADULT_RATING = re.compile(r'RTA-5042-1996-1400-1577-RTA|\badult\b', re.I)

@@ -38,7 +38,10 @@ allowed = set()
 # Bug tracker links carry only a bug number in the query string.
 bug_link = re.compile(r'https://(?:bugzilla\.mozilla\.org|bugs\.webkit\.org)/show_bug\.cgi\?id=\d+(?:#c?\d+)?[).,;:!\]]*')
 for path in crawl_files:
-    allowed.update(patterns['URL with query string'].findall(open(path, errors='replace').read()))
+    text = open(path, errors='replace').read()
+    allowed.update(patterns['URL with query string'].findall(text))
+    # Crawl page URLs with long slugs or tokens in their paths.
+    allowed.update(patterns['long base64 payload'].findall(text))
 if '--staged' in sys.argv:
     # (label, path, blob sha) for each staged file
     blobs = [('staged', path, meta.split()[1]) for meta, path in

@@ -5,6 +5,9 @@ out*/review-nsfw/
 *.log
 .publish-terms
 crawl/bodies_10k_raw/
-out*/
 run-*.log
 queries/xmldoc_features.csv
+dossiers/
+status.html
+out*/review-brief.csv
+out-recheck/

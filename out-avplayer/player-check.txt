@@ -1,0 +1,9 @@
+# CHANGE_VARIANT=B2 python3 player_check.py "$CHROME" queries/libs.csv avplayer 5   (2026-11-07, Chrome Canary 159, mobile)
+# A = plain Chrome, B = candidate 2 emulation; counts after scrolling 2400px; errors = B-only schema errors
+https://gomathanswerkey.com/   | A videos 2, iframes 5 | B videos 0, iframes 4, error "Invalid type: Expected unknown but received Document"
+https://www.fontoskerdesek.hu/ | A videos 2, iframes 8 | B videos 0, iframes 7, error "Invalid type: Expected unknown but received Document"
+http://www.china101.com/       | load blocked (ERR_BLOCKED_BY_CLIENT) in both
+https://snadnejidlo.com/       | A videos 0, iframes 0 | B videos 0, iframes 0 (player not created in either)
+https://thefamousinfo.com/     | A videos 0, iframes 4 | B videos 0, iframes 4 (player not created in either)
+# On gomathanswerkey.com the A video is inside Aniview's floating player (avp-player-ui, avp-video-ad),
+# playing an HLS stream from content1.avplayer.com.

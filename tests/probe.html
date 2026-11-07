@@ -1,0 +1,59 @@
+<!doctype html>
+<meta charset=utf-8>
+<meta name=timeout content=long>
+<script src=/resources/testharness.js></script>
+<script src=/resources/testharnessreport.js></script>
+<body>
+<script>
+const wait = (p, what, log) => Promise.race([p, new Promise(r => setTimeout(() => { log.push('TIMEOUT ' + what); r(); }, 3000))]);
+function desc(d, w) {
+  try {
+  w = w || window;
+  const chain = [];
+  for (let p = Object.getPrototypeOf(d); p; p = Object.getPrototypeOf(p)) chain.push(p.constructor && p.constructor.name);
+  return JSON.stringify({
+    tag: Object.prototype.toString.call(d),
+    ctor: d.constructor.name,
+    chain: chain.slice(0, 3).join('>'),
+    iHTML: d instanceof w.HTMLDocument, iXML: d instanceof w.XMLDocument,
+    contentType: d.contentType, ns: d.documentElement && d.documentElement.namespaceURI,
+  });
+  } catch (e) { return 'ERR ' + e; }
+}
+promise_test(async t => {
+  const log = [];
+  log.push('UA ' + navigator.userAgent);
+  log.push('HTMLDocument.name=' + HTMLDocument.name + ' same=' + (HTMLDocument === Document));
+  log.push('HTMLDocument.prototype own=' + Reflect.ownKeys(HTMLDocument.prototype).map(String).join(','));
+  log.push('XMLDocument.prototype own=' + Reflect.ownKeys(XMLDocument.prototype).map(String).join(','));
+  log.push('top ' + desc(document));
+  for (const type of ['text/html', 'application/xhtml+xml', 'text/xml', 'application/xml', 'image/svg+xml']) {
+    const f = document.createElement('iframe');
+    f.src = 'doc.py?type=' + encodeURIComponent(type);
+    document.body.append(f);
+    await wait(new Promise(r => f.onload = r), type, log);
+    log.push('iframe ' + type + ' outer-realm ' + desc(f.contentDocument) + ' inner-realm ' + desc(f.contentDocument, f.contentWindow));
+    try { log.push('  inner script toString: ' + f.contentWindow.eval('Object.prototype.toString.call(document)')); } catch (e) { log.push('  inner ERR ' + e); }
+  }
+  const p = new DOMParser();
+  for (const type of ['text/html', 'application/xhtml+xml', 'text/xml', 'application/xml', 'image/svg+xml']) {
+    const src = type == 'image/svg+xml' ? '<svg xmlns="http://www.w3.org/2000/svg"/>' : '<html xmlns="http://www.w3.org/1999/xhtml"><body/></html>';
+    log.push('DOMParser ' + type + ' ' + desc(p.parseFromString(src, type)));
+  }
+  for (const type of ['text/html', 'application/xhtml+xml', 'text/xml', 'image/svg+xml']) {
+    const x = new XMLHttpRequest();
+    x.open('GET', 'doc.py?type=' + encodeURIComponent(type));
+    x.responseType = 'document';
+    x.send();
+    await wait(new Promise(r => x.onload = r), 'xhr ' + type, log);
+    log.push('XHR ' + type + ' ' + desc(x.responseXML));
+  }
+  log.push('createDocument null ' + desc(document.implementation.createDocument(null, null)));
+  log.push('createDocument xhtml ' + desc(document.implementation.createDocument('http://www.w3.org/1999/xhtml', 'html')));
+  log.push('createDocument svg ' + desc(document.implementation.createDocument('http://www.w3.org/2000/svg', 'svg')));
+  log.push('createHTMLDocument ' + desc(document.implementation.createHTMLDocument('')));
+  log.push('new Document ' + desc(new Document()));
+  log.push('Document.parseHTMLUnsafe ' + (Document.parseHTMLUnsafe ? desc(Document.parseHTMLUnsafe('<p>')) : 'n/a'));
+  assert_true(false, '\n' + log.join('\n'));
+});
+</script>

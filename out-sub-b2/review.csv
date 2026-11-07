@@ -1,0 +1,77 @@
+idx,stratum,page,rating,method,note
+0,subframe-desktop,https://adultfriendfinder.com/,not assessable,auto,nsfw; load error: Page.goto: Timeout 30000ms exceeded.
+1,subframe-desktop,https://adultfriendfinder.com/go/page/privacy.html?,not assessable,auto,nsfw; load error: Page.goto: Timeout 30000ms exceeded.
+2,subframe-desktop,https://app.powerbi.com/,no visible change,auto,A vs B within A vs A2 noise
+3,subframe-desktop,https://doodles.google/,no visible change,auto,A vs B within A vs A2 noise
+4,subframe-desktop,https://doodles.google/doodle/fourth-of-july-2026/,no visible change,auto,A vs B within A vs A2 noise
+5,subframe-desktop,https://horoscopes.astro-seek.com/current-planets-astrology-transits-planetary-positions,not assessable,auto,HTTP 403
+6,subframe-desktop,https://komachi.yomiuri.co.jp/topics/id/1252699/,no visible change,auto,A vs B within A vs A2 noise
+7,subframe-desktop,https://pm.eyefinity.com/,no visible change,auto,A vs B within A vs A2 noise
+8,subframe-desktop,https://thegay.com/,no visible change,auto,nsfw; A vs B within A vs A2 noise
+9,subframe-desktop,https://thegay.com/videos/1699547/cody-cummings-in-stroke-capade-on-the-window-sill/,not assessable,auto,nsfw; load error: Page.goto: Timeout 30000ms exceeded.
+10,subframe-desktop,https://web.de/,no visible change,auto,A vs B within A vs A2 noise
+11,subframe-desktop,https://web.de/?origin=lpc,no visible change,auto,A vs B within A vs A2 noise
+12,subframe-desktop,https://wetransfer.com/,no visible change,manual,recheck: rotating promo backgrounds
+13,subframe-desktop,https://wetransfer.com/legal/manage-cookies,no visible change,auto,A vs B within A vs A2 noise
+14,subframe-desktop,https://www.3cat.cat/,no visible change,auto,A vs B within A vs A2 noise
+15,subframe-desktop,https://www.angelone.in/start-sip,no visible change,auto,A vs B within A vs A2 noise
+16,subframe-desktop,https://www.argentina.gob.ar/,no visible change,auto,A vs B within A vs A2 noise
+17,subframe-desktop,https://www.argentina.gob.ar/tema/documentacion,no visible change,auto,A vs B within A vs A2 noise
+18,subframe-desktop,https://www.cvbankas.lt/,no visible change,auto,A vs B within A vs A2 noise
+19,subframe-desktop,https://www.cvbankas.lt/automobiliu-dazytojas-a-kaune/1-14112084,no visible change,auto,A vs B within A vs A2 noise
+20,subframe-desktop,https://www.delfi.ee/,no visible change,auto,nsfw; A vs B within A vs A2 noise
+21,subframe-desktop,https://www.delfi.ee/artikkel/120618051/uheksa-paeva-mis-vapustasid-maailma-ehk-kuidas-donald-trumpi-salaplaanid-reetsid-ukraina-ja-euroopa?dsrc=%253D%253DQfiUTMlBzYlRGN2I2Nl1CNjJTOtYmYwQTL3AzYj1SN4QmZzQzYxIiOiQWSrN2bsJmIskjM1cDOwITO3EjOiAXbhR3cl1Wa0JCLwojI4VGZulkbvlGdjV2ciwiIyUGc5R1aj9GbCJiOiUGc5R1aj9GbiJCLwojI4VGZul0aj9GbiJCLikmZsVGRiojIl1WYOVGdpNnIsISZnFGc052byZmI6ISZwlHVldWYwJye,no visible change,auto,A vs B within A vs A2 noise
+22,subframe-desktop,https://www.delfi.lt/,no visible change,auto,A vs B within A vs A2 noise
+23,subframe-desktop,https://www.delfi.lt/naujienos/lietuvoje/vytautas-landsbergis-apie-pykcio-apimtus-zmones-uzsukit-savo-pykcio-masineles-120317785,no visible change,manual,"nsfw; adult or flagged page, not viewed; A/B metrics within A/A2 noise and no change-related B errors"
+24,subframe-desktop,https://www.gmx.net/,no visible change,auto,A vs B within A vs A2 noise
+25,subframe-desktop,https://www.gmx.net/magazine/politik/inland/institut-remigration-martin-sellners-gruendung-steckt-42833630,no visible change,auto,A vs B within A vs A2 noise
+26,subframe-desktop,https://www.gsmarena.com/,no visible change,manual,page noise only (reviewed)
+27,subframe-desktop,https://www.gsmarena.com/googles_new_fitbit_edge_fitness_tracker_offers_a_screen_and_up_to_7_days_of_usage-news-75011.php,no visible change,auto,A vs B within A vs A2 noise
+28,subframe-desktop,https://www.loterianacional.gob.mx/,no visible change,auto,A vs B within A vs A2 noise
+29,subframe-desktop,https://www.mlb.com/,no visible change,manual,page noise only (reviewed)
+30,subframe-desktop,https://www.nikkan-gendai.com/articles/view/news/394210,no visible change,manual,page noise only (reviewed)
+31,subframe-desktop,https://www.partslink24.com/,no visible change,auto,A vs B within A vs A2 noise
+32,subframe-desktop,https://www.porn.com/stepsister,no visible change,auto,nsfw; A vs B within A vs A2 noise
+33,subframe-desktop,https://www.programiz.com/,no visible change,auto,A vs B within A vs A2 noise
+34,subframe-desktop,https://www.shaalaa.com/,not assessable,auto,HTTP 403
+35,subframe-desktop,https://www.shaalaa.com/search,not assessable,auto,HTTP 403
+36,subframe-desktop,https://www.shmu.sk/,no visible change,auto,A vs B within A vs A2 noise
+37,subframe-desktop,https://www.shmu.sk/sk/?page=987,no visible change,auto,A vs B within A vs A2 noise
+38,subframe-desktop,https://www.tvgids.nl/amusement/race-across-the-world/lineair/221287892,no visible change,auto,A vs B within A vs A2 noise
+39,subframe-mobile,https://adultfriendfinder.com/,not assessable,auto,nsfw; load error: Page.goto: Timeout 30000ms exceeded.
+40,subframe-mobile,https://app.powerbi.com/,no visible change,auto,A vs B within A vs A2 noise
+41,subframe-mobile,https://doodles.google/,no visible change,auto,A vs B within A vs A2 noise
+42,subframe-mobile,https://doodles.google/search/,no visible change,auto,A vs B within A vs A2 noise
+43,subframe-mobile,https://erotik.quoka.de/anzeigen/bekanntschaften/erotik/erotische-massagen/,no visible change,auto,nsfw; A vs B within A vs A2 noise
+44,subframe-mobile,https://horoscopes.astro-seek.com/current-planets-astrology-transits-planetary-positions,not assessable,auto,HTTP 403
+45,subframe-mobile,https://m.gsmarena.com/,no visible change,auto,A vs B within A vs A2 noise
+46,subframe-mobile,https://m.gsmarena.com/samsung_adds_support_for_new_languages_across_galaxy_ai_features_and_bixby-news-75036.php,no visible change,auto,A vs B within A vs A2 noise
+47,subframe-mobile,https://thegay.com/,no visible change,manual,"nsfw; adult or flagged page, not viewed; A/B metrics within A/A2 noise and no change-related B errors"
+48,subframe-mobile,https://thegay.com/videos/286018/french-vintage-classic-school-boys-full-movie/,no visible change,manual,"nsfw; adult or flagged page, not viewed; A/B metrics within A/A2 noise and no change-related B errors"
+49,subframe-mobile,https://web.de/,no visible change,auto,A vs B within A vs A2 noise
+50,subframe-mobile,https://web.de/magazine/politik/inland/institut-remigration-martin-sellners-gruendung-steckt-42833630,no visible change,auto,A vs B within A vs A2 noise
+51,subframe-mobile,https://www.3cat.cat/,no visible change,auto,A vs B within A vs A2 noise
+52,subframe-mobile,https://www.argentina.gob.ar/,no visible change,auto,A vs B within A vs A2 noise
+53,subframe-mobile,https://www.argentina.gob.ar/tema/documentacion,no visible change,auto,A vs B within A vs A2 noise
+54,subframe-mobile,https://www.cvbankas.lt/,no visible change,auto,A vs B within A vs A2 noise
+55,subframe-mobile,https://www.cvbankas.lt/nr1,no visible change,auto,A vs B within A vs A2 noise
+56,subframe-mobile,https://www.delfi.ee/,no visible change,auto,A vs B within A vs A2 noise
+57,subframe-mobile,https://www.delfi.ee/artikkel/120617927/prokuratuur-peab-kalle-grunthalit-paranoiliseks-ja-nouab-talle-kutusekaardiga-trikitamise-eest-trahvi?dsrc=%253D%253DQfiUTMlBzYlRGN2I2Nl1CNjJTOtYmYwQTL3AzYj1SN4QmZzQzYxIiOiQWSrN2bsJmIsMzN1QjNwITO3EjOiAXbhR3cl1Wa0JCLwojI4VGZulkbvlGdjV2ciwiIyUGc5R1aj9GbCJiOiUGc5R1aj9GbiJCLwojI4VGZul0aj9GbiJCLikmZsVGRiojIl1WYOVGdpNnIsISZnFGc052byZmI6ISZwlHVldWYwJye,no visible change,auto,A vs B within A vs A2 noise
+58,subframe-mobile,https://www.delfi.lt/,no visible change,auto,A vs B within A vs A2 noise
+59,subframe-mobile,https://www.delfi.lt/verslas/naujienos/vien-uz-isidarbinima-papildomi-pinigai-dvi-zinomos-imones-pasiule-simtus-siekiancias-premijas-maxima-ir-vilniaus-baldai-darbuotoju-paieskoje-emesi-nauju-zingsniu-uz-isidarbinima-premijos-120317794,no visible change,auto,A vs B within A vs A2 noise
+60,subframe-mobile,https://www.desikahani2.net/teacher-student-chudai/english-ki-padhayi-sexy-mami-ke-sath-1/,not assessable,auto,nsfw; load error: visit timed out after 90s
+61,subframe-mobile,https://www.e1.ru/,not assessable,auto,load error: Page.goto: Timeout 30000ms exceeded.
+62,subframe-mobile,https://www.gmx.net/,no visible change,auto,A vs B within A vs A2 noise
+63,subframe-mobile,https://www.gmx.net/magazine/wirtschaft/lufthansa-gewinnt-bieterrennen-portugals-tap-42835050,no visible change,auto,A vs B within A vs A2 noise
+64,subframe-mobile,https://www.loterianacional.gob.mx/,no visible change,auto,A vs B within A vs A2 noise
+65,subframe-mobile,https://www.nettavisen.no/,no visible change,manual,recheck: same in all four loads
+66,subframe-mobile,https://www.partslink24.com/,no visible change,auto,A vs B within A vs A2 noise
+67,subframe-mobile,https://www.partslink24.com/en,no visible change,auto,A vs B within A vs A2 noise
+68,subframe-mobile,https://www.porn.com/18-year-old-sex,no visible change,manual,"nsfw; adult or flagged page, not viewed; A/B metrics within A/A2 noise and no change-related B errors"
+69,subframe-mobile,https://www.programiz.com/,no visible change,auto,A vs B within A vs A2 noise
+70,subframe-mobile,https://www.shaalaa.com/,no visible change,auto,A vs B within A vs A2 noise
+71,subframe-mobile,https://www.shaalaa.com/search,no visible change,manual,page noise only (reviewed)
+72,subframe-mobile,https://www.shmu.sk/,no visible change,auto,A vs B within A vs A2 noise
+73,subframe-mobile,https://www.shmu.sk/sk/?page=987,no visible change,auto,A vs B within A vs A2 noise
+74,subframe-mobile,https://www.swp.de/wirtschaft/teures-oel-jetzt-heizoel-kaufen-oder-lieber-warten-79568872.html,no visible change,auto,A vs B within A vs A2 noise
+75,subframe-mobile,https://www.xahani.com/girlfriend-ki-behan-ki-chudai-2/,not assessable,auto,nsfw; load error: visit timed out after 90s

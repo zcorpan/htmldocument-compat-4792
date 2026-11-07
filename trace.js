@@ -13,7 +13,7 @@
   const baseline = { HP: R.ownKeys(HP).map(String), XP: R.ownKeys(XP).map(String) };
   const events = new Map();
   let busy = false;
-  const trace = { events: [], protoAdds: null, docType: null, url: String(location.href).replace(/[?#].*/, '') };
+  const trace = { events: [], protoAdds: null, docType: null, url: location.origin };
   W.__hdTrace = trace;
   defProp(trace, 'protos', { value: { HP, XP, DP }, enumerable: false });
   try { trace.docType = ctGet.call(document); } catch (e) {}
