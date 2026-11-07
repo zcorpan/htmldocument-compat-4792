@@ -1,0 +1,26 @@
+<!doctype html>
+<title>react-tooltip 4.2.15</title>
+<!-- React 16.14.0, prop-types 15.8.1, uuid 8.3.2, react-tooltip 4.2.15 (npm builds, MIT) -->
+<script src="vendor/react.production.min.js"></script>
+<script src="vendor/react-dom.production.min.js"></script>
+<script src="vendor/prop-types.min.js"></script>
+<script src="vendor/uuid.min.js"></script>
+<script>
+  window.__errors = [];
+  window.addEventListener('error', e => window.__errors.push(String(e.message)));
+  var module = { exports: {} }, exports = module.exports;
+  function require(n) { return { react: React, 'prop-types': PropTypes, uuid: uuid }[n]; }
+</script>
+<script src="vendor/react-tooltip-4.2.15.js"></script>
+<div id="root"></div>
+<script>
+  const Tip = module.exports.default || module.exports;
+  const e = React.createElement;
+  class App extends React.Component {
+    componentDidCatch(err) { window.__errors.push('caught: ' + err.name + ': ' + err.message); }
+    render() { return e('div', null, e('p', { 'data-tip': 'hello', id: 'target' }, 'Product page with a tooltip'), e(Tip)); }
+  }
+  try { ReactDOM.render(e(App), document.getElementById('root')); } catch (err) { window.__errors.push('render: ' + err.name + ': ' + err.message); }
+  window.__results = { rootChildren: document.getElementById('root').childElementCount, text: document.getElementById('root').textContent,
+    styleInHead: !!document.head.querySelector('style[data-react-tooltip]'), errors: window.__errors };
+</script>
