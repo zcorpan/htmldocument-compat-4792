@@ -1,15 +1,16 @@
 # Flags adult pages in compare.py's output, so they're marked nsfw and get a repro test instead of
 # review images. Page signals: an adult <meta name="rating"> (recorded by harness.py) and the host
-# being blocked by Cloudflare's family resolver (which also blocks malware). Images: NudeNet
-# (pip install nudenet) finding exposed nudity in a 400px tile. It errs toward flagging: nude
-# paintings and sculpture get flagged, lingerie and swimwear pass. Adult content without nudity
-# isn't caught, so also flag by eye. Downscaled images (review pairs) are caught less often.
-# Writes <out-dir>/nsfw.csv (idx, page, reasons), keeping rows already there (add pages by hand).
-# Run after compare.py and before analyze.py. publish_check.py runs check() on staged images.
+# being blocked by Cloudflare's family resolver (which also blocks malware). Writes
+# <out-dir>/nsfw.csv (idx, page, reasons), keeping rows already there (add pages by hand).
+# Run after compare.py and before analyze.py.
+# check() is the image check, used by analyze.py on the screenshots of pages needing review and by
+# publish_check.py on staged images: NudeNet (pip install nudenet) finding exposed nudity in a 400px
+# tile. It errs toward flagging: nude paintings and sculpture get flagged, lingerie and swimwear
+# pass. Adult content without nudity isn't caught, so also flag by eye. Downscaled images (review
+# pairs) are caught less often.
 # Usage: nsfw_check.py <out-dir>
-import csv, glob, json, os, re, sys, urllib.parse, urllib.request
+import csv, json, os, re, sys, urllib.parse, urllib.request
 from PIL import Image
-Image.MAX_IMAGE_PIXELS = None  # full-page screenshots of very long or wide documents
 import ocr_check
 
 ADULT_RATING = re.compile(r'RTA-5042-1996-1400-1577-RTA|\badult\b', re.I)
@@ -77,23 +78,15 @@ def flag_pages(out_dir):
 if __name__ == '__main__':
     out_dir = sys.argv[1]
     path = f'{out_dir}/nsfw.csv'
-    pages = {r['idx']: r['page'] for r in map(json.loads, open(f'{out_dir}/results.jsonl'))}
     flags = {}
     if os.path.exists(path):
         flags = {int(r['idx']): (r['page'], set(filter(None, r['reasons'].split('; '))))
                  for r in csv.DictReader(open(path))}
     for idx, (page, reasons) in flag_pages(out_dir).items():
         flags.setdefault(idx, (page, set()))[1].update(reasons)
-    if backend():
-        for shot, x, y, label, score in check(sorted(glob.glob(f'{out_dir}/shots/*.png'))):
-            idx = int(os.path.basename(shot).split('-')[0])
-            flags.setdefault(idx, (pages.get(idx, ''), set()))[1].add('nudity in screenshot')
-    else:
-        print('no image check: pip install nudenet')
     with open(path, 'w', newline='') as f:
         w = csv.writer(f)
         w.writerow(['idx', 'page', 'reasons'])
         for idx in sorted(flags):
             w.writerow([idx, flags[idx][0], '; '.join(sorted(flags[idx][1]))])
     print(len(flags), 'pages flagged in', path)
-    sys.exit(0 if backend() else 1)

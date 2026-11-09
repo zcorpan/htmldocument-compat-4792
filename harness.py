@@ -128,10 +128,10 @@ async def visit(browser, url, client, setup, shot=None, wait=3000, full_page=Tru
                 frames.append({'url': scrub(fr.url), 'error': scrub(str(e))[:100]})
         rec['frames'] = frames
         if shot:
-            await page.screenshot(path=shot, full_page=full_page, scale='css', timeout=20000)
-            img = Image.open(shot)
-            if img.height > 4000:
-                img.crop((0, 0, img.width, 4000)).save(shot)
+            # The top 4000px; Playwright trims the clip to the page. Uncut, tall pages (XML tree views,
+            # long feeds) time out and make images too big to open or check.
+            clip = {'x': 0, 'y': 0, 'width': 100000, 'height': 4000} if full_page else None
+            await page.screenshot(path=shot, full_page=full_page, clip=clip, scale='css', timeout=20000)
             rec['shot'] = shot
     except Exception as e:
         rec['error'] = scrub(str(e).splitlines()[0])[:300]

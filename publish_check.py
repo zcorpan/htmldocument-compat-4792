@@ -3,12 +3,14 @@
 # Usage: python3 publish_check.py [--staged] [--crawl=GLOB,...] [EXTRA_TERM ...]
 #   Terms: the tester's public IP, city, region, country name and demonym, one per line in
 #   .publish-terms (gitignored), plus any EXTRA_TERM. --crawl: files of crawl data, not scanned and
-#   whose URLs are allowed anywhere (default queries/**/*,crawl/**/*). Bug links (Bugzilla and
-#   WebKit `show_bug.cgi?id=N`) are allowed too.
+#   whose URLs are allowed anywhere (default queries/**/*,crawl/**/*; only files in git count, so
+#   gitignored downloads don't slow every commit). Bug links (Bugzilla and WebKit
+#   `show_bug.cgi?id=N`) are allowed too.
 # Exits 1 and lists matches if anything is found. Fix it in history (not just HEAD) before pushing.
 # With --staged, staged images are OCRed with ocr_check.py and checked for nudity with nsfw_check.py,
 # and review images or screenshots of pages in nsfw.csv are blocked (other images aren't scanned).
-import csv, glob, os, re, subprocess, sys, tempfile
+# Images that passed are remembered by blob and terms, so a retried commit doesn't recheck them.
+import csv, glob, hashlib, os, re, subprocess, sys, tempfile
 
 
 def run(*args):
@@ -33,7 +35,8 @@ patterns = {
 }
 # URLs from the crawl data were recorded by HTTP Archive, not by us; allow them anywhere.
 crawl_globs = next((a[8:] for a in sys.argv[1:] if a.startswith('--crawl=')), 'queries/**/*,crawl/**/*').split(',')
-crawl_files = {f for g in crawl_globs for f in glob.glob(g, recursive=True) if os.path.isfile(f)}
+in_git = set(run('git', 'ls-files').splitlines())
+crawl_files = {f for g in crawl_globs for f in glob.glob(g, recursive=True) if f in in_git}
 allowed = set()
 # Bug tracker links carry only a bug number in the query string.
 bug_link = re.compile(r'https://(?:bugzilla\.mozilla\.org|bugs\.webkit\.org)/show_bug\.cgi\?id=\d+(?:#c?\d+)?[).,;:!\]]*')
@@ -58,7 +61,7 @@ for label, path, sha in blobs:
     blob = subprocess.run(['git', 'cat-file', 'blob', sha], capture_output=True).stdout
     if b'\0' in blob[:8000]:
         if path.lower().endswith(('.png', '.jpg', '.jpeg', '.webp')):
-            images.append((path, blob))
+            images.append((path, blob, sha))
         continue
     text = blob.decode('utf8', 'replace')
     for name, pat in patterns.items():
@@ -68,7 +71,10 @@ for label, path, sha in blobs:
             print(f'{label} {path}: {name} ({len(hits)}): {hits[0][:80]!r}')
 if '--staged' in sys.argv and images:
     import nsfw_check, ocr_check
-    for path, blob in images:
+    cache = run('git', 'rev-parse', '--git-path', 'publish-check-clean')
+    key = hashlib.sha1('\n'.join(sorted(terms)).encode()).hexdigest()[:12]
+    clean = set(open(cache).read().split()) if os.path.exists(cache) else set()
+    for path, blob, sha in images:
         # out*/review/<idx>.png and out*/shots/<idx>-<tag>.png of pages flagged in out*/nsfw.csv
         out_dir, kind = os.path.split(os.path.dirname(path))[0], os.path.basename(os.path.dirname(path))
         m = re.match(r'\d+', os.path.basename(path))
@@ -78,10 +84,13 @@ if '--staged' in sys.argv and images:
             print(f'staged {path}: page is in {flagged}; commit a repro test instead')
             found += 1
     with tempfile.TemporaryDirectory() as tmp:
-        files = {}
-        for i, (path, blob) in enumerate(images):
-            files[os.path.join(tmp, f'{i}{os.path.splitext(path)[1]}')] = path
-            open(list(files)[-1], 'wb').write(blob)
+        files, shas, hit = {}, {}, set()
+        for i, (path, blob, sha) in enumerate(images):
+            if f'{sha}-{key}' in clean:
+                continue
+            f = os.path.join(tmp, f'{i}{os.path.splitext(path)[1]}')
+            files[f], shas[f] = path, sha
+            open(f, 'wb').write(blob)
         if not ocr_check.backend():
             print('no OCR backend for staged images: pip install pyobjc-framework-Vision (macOS) or install tesseract')
             found += 1
@@ -89,6 +98,7 @@ if '--staged' in sys.argv and images:
             for f, x, y, line in ocr_check.check(list(files)):
                 print(f'staged {files[f]}: OCR text (tile at x {x:.2f}, y {y:.2f}): {line[:80]!r}')
                 found += 1
+                hit.add(f)
         if not nsfw_check.backend():
             print('no nudity check for staged images: pip install nudenet')
             found += 1
@@ -96,6 +106,10 @@ if '--staged' in sys.argv and images:
             for f, x, y, label, score in nsfw_check.check(list(files)):
                 print(f'staged {files[f]}: adult content ({label} {score}, tile at x {x:.2f}, y {y:.2f})')
                 found += 1
+                hit.add(f)
+        if ocr_check.backend() and nsfw_check.backend():
+            with open(cache, 'a') as c:
+                c.writelines(f'{shas[f]}-{key}\n' for f in files if f not in hit)
 if not os.path.exists('.publish-terms'):
     print('no .publish-terms: add the tester\'s public IP, city, region, country name and demonym')
     found += 1

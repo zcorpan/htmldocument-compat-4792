@@ -1,11 +1,13 @@
 # Rates the clear cases in compare.py's output (<out-dir>/auto.csv) and writes A|B pairs for the
 # rest to <out-dir>/review/<idx>.png. Creates <out-dir>/review.csv, prefilled with the auto ratings,
 # if it doesn't exist; fill in the empty ratings there by hand. Rerunning never overwrites it.
-# Pages in <out-dir>/nsfw.csv (nsfw_check.py) get their pairs in <out-dir>/review-nsfw/ (gitignored).
+# Before writing a pair it checks the page's A and B screenshots for nudity (nsfw_check.check) and
+# adds hits to <out-dir>/nsfw.csv; pages listed there get their pairs in <out-dir>/review-nsfw/
+# (gitignored). Only pages needing review are checked: their pairs are the images people see.
 # Usage: analyze.py <out-dir>
 import csv, json, os, re, sys
 from PIL import Image
-import change
+import change, nsfw_check
 
 out_dir = sys.argv[1]
 rows = sorted(map(json.loads, open(f'{out_dir}/results.jsonl')), key=lambda r: r['idx'])
@@ -39,7 +41,12 @@ def new_errors(r):
     return ' | '.join(e[:100] for k, e in messages(r['B']).items() if k not in before)[:300]
 
 
-nsfw = {int(r['idx']) for r in csv.DictReader(open(f'{out_dir}/nsfw.csv'))} if os.path.exists(f'{out_dir}/nsfw.csv') else set()
+nsfw_path = f'{out_dir}/nsfw.csv'
+flags = {int(r['idx']): r for r in csv.DictReader(open(nsfw_path))} if os.path.exists(nsfw_path) else {}
+nsfw = set(flags)
+checker = nsfw_check.backend()
+if not checker:
+    print('no image check: pip install nudenet')
 os.makedirs(f'{out_dir}/review', exist_ok=True)
 os.makedirs(f'{out_dir}/review-nsfw', exist_ok=True)
 rated = []
@@ -52,6 +59,9 @@ with open(f'{out_dir}/auto.csv', 'w', newline='') as f:
         w.writerow([r['idx'], r['stratum'], r['page'], rating, reason, r['textRatioAA2'], r['textRatioAB'], r['pixAA2'], r['pixAB'], new_errors(r)])
         if rating:
             continue
+        if checker and r['idx'] not in nsfw and nsfw_check.check([r['A']['shot'], r['B']['shot']]):
+            nsfw.add(r['idx'])
+            flags[r['idx']] = {'idx': r['idx'], 'page': r['page'], 'reasons': 'nudity in screenshot'}
         a, b = Image.open(r['A']['shot']), Image.open(r['B']['shot'])
         h = min(1100, max(a.height, b.height))
         im = Image.new('RGB', (a.width + b.width + 12, h), 'red')
@@ -63,6 +73,11 @@ with open(f'{out_dir}/auto.csv', 'w', newline='') as f:
             os.remove(f'{out_dir}/review/{name}')
         im.save(f"{out_dir}/{'review-nsfw' if r['idx'] in nsfw else 'review'}/{name}")
 
+with open(nsfw_path, 'w', newline='') as f:
+    w = csv.DictWriter(f, ['idx', 'page', 'reasons'])
+    w.writeheader()
+    w.writerows(flags[i] for i in sorted(flags))
+
 if not os.path.exists(f'{out_dir}/review.csv'):
     with open(f'{out_dir}/review.csv', 'w', newline='') as f:
         w = csv.writer(f)
@@ -73,3 +88,4 @@ if not os.path.exists(f'{out_dir}/review.csv'):
                 note = f'nsfw; {note}' if note else 'nsfw'
             w.writerow([r['idx'], r['stratum'], r['page'], rating, 'auto' if rating else 'manual', note])
 print(sum(1 for _, rating, _ in rated if not rating), 'pages to review in', f'{out_dir}/review/', 'and', f'{out_dir}/review-nsfw/')
+sys.exit(0 if checker else 1)

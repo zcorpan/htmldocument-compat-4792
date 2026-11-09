@@ -6,6 +6,8 @@
 import io, os, re, shutil, subprocess, sys
 from PIL import Image
 
+Image.MAX_IMAGE_PIXELS = None  # our own screenshots, which can be tall
+
 TILE, OVERLAP, SCALE = 1200, 150, 2
 IP = re.compile(r'(?<![\d.])(?:(?:25[0-5]|2[0-4]\d|1?\d?\d)\.){3}(?:25[0-5]|2[0-4]\d|1?\d?\d)(?![\d.])')
 

@@ -11,3 +11,5 @@ dossiers/
 status.html
 out*/review-brief.csv
 out-recheck/
+tmp/
+skill-notes.md
