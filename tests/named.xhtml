@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg">
+<head><title>named access probe</title><meta charset="utf-8"/></head>
+<body>
+<form name="f1"><input name="x1"/></form>
+<script>window.__inline = {doc: typeof document.f1, win: typeof window.f1, bare: (0, eval)('typeof f1')};</script>
+<img name="i1" alt=""/>
+<img id="i2" name="i2n" alt=""/>
+<img id="i3" alt=""/>
+<iframe name="fr1" src="about:blank"></iframe>
+<object id="o1"></object>
+<object name="o2"></object>
+<embed name="e1"/>
+<div id="d1"></div>
+<span name="s1"></span>
+<form name="dup"></form><form name="dup"></form>
+<form name="title"></form>
+<form name="cookie"></form>
+<svg:svg><svg:rect id="svgr"/></svg:svg>
+<script src="named-probe.js"></script>
+</body>
+</html>

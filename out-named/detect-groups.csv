@@ -1,0 +1,6 @@
+run,target,op,script,pages,names,values,example_page
+detect-chrome.jsonl,window,get,(no frame),2,ga google_esf,undefined->span:1 window->iframe:1,https://www.mpk-krasnik.pl/
+detect-firefox.jsonl,window,get,(no frame),2,ga google_esf,undefined->span:1 undefined->iframe:1,https://www.mpk-krasnik.pl/
+detect-chrome.jsonl,window,get,https://scalablebrainatlas.incf.org/mouse/ABA_v3,1,TEMPLATE,window->iframe:3,https://scalablebrainatlas.incf.org/mouse/ABA_v3
+detect-firefox.jsonl,window,get,https://www.mpk-krasnik.pl/gts_files/themes/default/main.js,1,module,undefined->div:2,https://www.mpk-krasnik.pl/
+detect-firefox.jsonl,window,get,https://scalablebrainatlas.incf.org/mouse/ABA_v3,1,TEMPLATE,undefined->iframe:3,https://scalablebrainatlas.incf.org/mouse/ABA_v3

@@ -55,7 +55,8 @@ else:
              for meta, path in (l.split('\t', 1) for l in run('git', 'ls-tree', '-r', commit).splitlines())]
 seen, found, images = set(), 0, []
 for label, path, sha in blobs:
-    if sha in seen or path in crawl_files:
+    # Third-party libraries copied from a CDN for repro pages (not live page data).
+    if sha in seen or path in crawl_files or '/vendor/' in '/' + path:
         continue
     seen.add(sha)
     blob = subprocess.run(['git', 'cat-file', 'blob', sha], capture_output=True).stdout

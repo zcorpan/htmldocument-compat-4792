@@ -1,0 +1,992 @@
+{
+ "chrome": {
+  "named.xhtml": {
+   "contentType": "application/xhtml+xml",
+   "tag": "[object XMLDocument]",
+   "inline": {
+    "doc": "undefined",
+    "win": "undefined",
+    "bare": "undefined"
+   },
+   "names": {
+    "f1": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "i1": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "i2": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "i2n": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "i3": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "fr1": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "window",
+     "winIn": true,
+     "bare": "window"
+    },
+    "o1": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "o2": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "e1": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "d1": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "s1": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "dup": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "title": {
+     "doc": "string:named access probe",
+     "docIn": true,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "cookie": {
+     "doc": "string:",
+     "docIn": true,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "svgr": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "x1": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    }
+   }
+  },
+  "named.xhtml@load": {
+   "contentType": "application/xhtml+xml",
+   "tag": "[object XMLDocument]",
+   "inline": {
+    "doc": "undefined",
+    "win": "undefined",
+    "bare": "undefined"
+   },
+   "names": {
+    "f1": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "i1": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "i2": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "i2n": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "i3": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "fr1": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "window",
+     "winIn": true,
+     "bare": "window"
+    },
+    "o1": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "o2": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "e1": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "d1": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "s1": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "dup": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "title": {
+     "doc": "string:named access probe",
+     "docIn": true,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "cookie": {
+     "doc": "string:",
+     "docIn": true,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "svgr": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "x1": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    }
+   }
+  },
+  "named.html": {
+   "contentType": "text/html",
+   "tag": "[object HTMLDocument]",
+   "inline": {
+    "doc": "object",
+    "win": "object",
+    "bare": "object"
+   },
+   "names": {
+    "f1": {
+     "doc": "form[f1]",
+     "docIn": true,
+     "win": "form[f1]",
+     "winIn": true,
+     "bare": "form[f1]"
+    },
+    "i1": {
+     "doc": "img[i1]",
+     "docIn": true,
+     "win": "img[i1]",
+     "winIn": true,
+     "bare": "img[i1]"
+    },
+    "i2": {
+     "doc": "img#i2[i2n]",
+     "docIn": true,
+     "win": "img#i2[i2n]",
+     "winIn": true,
+     "bare": "img#i2[i2n]"
+    },
+    "i2n": {
+     "doc": "img#i2[i2n]",
+     "docIn": true,
+     "win": "img#i2[i2n]",
+     "winIn": true,
+     "bare": "img#i2[i2n]"
+    },
+    "i3": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "img#i3",
+     "winIn": true,
+     "bare": "img#i3"
+    },
+    "fr1": {
+     "doc": "window",
+     "docIn": true,
+     "win": "window",
+     "winIn": true,
+     "bare": "window"
+    },
+    "o1": {
+     "doc": "object#o1",
+     "docIn": true,
+     "win": "object#o1",
+     "winIn": true,
+     "bare": "object#o1"
+    },
+    "o2": {
+     "doc": "object[o2]",
+     "docIn": true,
+     "win": "object[o2]",
+     "winIn": true,
+     "bare": "object[o2]"
+    },
+    "e1": {
+     "doc": "embed[e1]",
+     "docIn": true,
+     "win": "embed[e1]",
+     "winIn": true,
+     "bare": "embed[e1]"
+    },
+    "d1": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "div#d1",
+     "winIn": true,
+     "bare": "div#d1"
+    },
+    "s1": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "dup": {
+     "doc": "collection(2)",
+     "docIn": true,
+     "win": "collection(2)",
+     "winIn": true,
+     "bare": "collection(2)"
+    },
+    "title": {
+     "doc": "form[title]",
+     "docIn": true,
+     "win": "form[title]",
+     "winIn": true,
+     "bare": "form[title]"
+    },
+    "cookie": {
+     "doc": "form[cookie]",
+     "docIn": true,
+     "win": "form[cookie]",
+     "winIn": true,
+     "bare": "form[cookie]"
+    },
+    "svgr": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "svg:rect#svgr",
+     "winIn": true,
+     "bare": "svg:rect#svgr"
+    },
+    "x1": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    }
+   }
+  },
+  "named.html@load": {
+   "contentType": "text/html",
+   "tag": "[object HTMLDocument]",
+   "inline": {
+    "doc": "object",
+    "win": "object",
+    "bare": "object"
+   },
+   "names": {
+    "f1": {
+     "doc": "form[f1]",
+     "docIn": true,
+     "win": "form[f1]",
+     "winIn": true,
+     "bare": "form[f1]"
+    },
+    "i1": {
+     "doc": "img[i1]",
+     "docIn": true,
+     "win": "img[i1]",
+     "winIn": true,
+     "bare": "img[i1]"
+    },
+    "i2": {
+     "doc": "img#i2[i2n]",
+     "docIn": true,
+     "win": "img#i2[i2n]",
+     "winIn": true,
+     "bare": "img#i2[i2n]"
+    },
+    "i2n": {
+     "doc": "img#i2[i2n]",
+     "docIn": true,
+     "win": "img#i2[i2n]",
+     "winIn": true,
+     "bare": "img#i2[i2n]"
+    },
+    "i3": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "img#i3",
+     "winIn": true,
+     "bare": "img#i3"
+    },
+    "fr1": {
+     "doc": "window",
+     "docIn": true,
+     "win": "window",
+     "winIn": true,
+     "bare": "window"
+    },
+    "o1": {
+     "doc": "object#o1",
+     "docIn": true,
+     "win": "object#o1",
+     "winIn": true,
+     "bare": "object#o1"
+    },
+    "o2": {
+     "doc": "object[o2]",
+     "docIn": true,
+     "win": "object[o2]",
+     "winIn": true,
+     "bare": "object[o2]"
+    },
+    "e1": {
+     "doc": "embed[e1]",
+     "docIn": true,
+     "win": "embed[e1]",
+     "winIn": true,
+     "bare": "embed[e1]"
+    },
+    "d1": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "div#d1",
+     "winIn": true,
+     "bare": "div#d1"
+    },
+    "s1": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    },
+    "dup": {
+     "doc": "collection(2)",
+     "docIn": true,
+     "win": "collection(2)",
+     "winIn": true,
+     "bare": "collection(2)"
+    },
+    "title": {
+     "doc": "form[title]",
+     "docIn": true,
+     "win": "form[title]",
+     "winIn": true,
+     "bare": "form[title]"
+    },
+    "cookie": {
+     "doc": "form[cookie]",
+     "docIn": true,
+     "win": "form[cookie]",
+     "winIn": true,
+     "bare": "form[cookie]"
+    },
+    "svgr": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "svg:rect#svgr",
+     "winIn": true,
+     "bare": "svg:rect#svgr"
+    },
+    "x1": {
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false,
+     "bare": "ReferenceError"
+    }
+   }
+  },
+  "version": "159.0.8145.0"
+ },
+ "firefox": {
+  "named.xhtml": {
+   "contentType": "application/xhtml+xml",
+   "inline": {
+    "bare": "object",
+    "doc": "object",
+    "win": "object"
+   },
+   "names": {
+    "cookie": {
+     "bare": "form[cookie]",
+     "doc": "form[cookie]",
+     "docIn": true,
+     "win": "form[cookie]",
+     "winIn": true
+    },
+    "d1": {
+     "bare": "div#d1",
+     "doc": "undefined",
+     "docIn": false,
+     "win": "div#d1",
+     "winIn": true
+    },
+    "dup": {
+     "bare": "collection(2)",
+     "doc": "collection(2)",
+     "docIn": true,
+     "win": "collection(2)",
+     "winIn": true
+    },
+    "e1": {
+     "bare": "embed[e1]",
+     "doc": "embed[e1]",
+     "docIn": true,
+     "win": "embed[e1]",
+     "winIn": true
+    },
+    "f1": {
+     "bare": "form[f1]",
+     "doc": "form[f1]",
+     "docIn": true,
+     "win": "form[f1]",
+     "winIn": true
+    },
+    "fr1": {
+     "bare": "ReferenceError",
+     "doc": "window",
+     "docIn": true,
+     "win": "undefined",
+     "winIn": false
+    },
+    "i1": {
+     "bare": "img[i1]",
+     "doc": "img[i1]",
+     "docIn": true,
+     "win": "img[i1]",
+     "winIn": true
+    },
+    "i2": {
+     "bare": "img#i2[i2n]",
+     "doc": "img#i2[i2n]",
+     "docIn": true,
+     "win": "img#i2[i2n]",
+     "winIn": true
+    },
+    "i2n": {
+     "bare": "img#i2[i2n]",
+     "doc": "img#i2[i2n]",
+     "docIn": true,
+     "win": "img#i2[i2n]",
+     "winIn": true
+    },
+    "i3": {
+     "bare": "img#i3",
+     "doc": "undefined",
+     "docIn": false,
+     "win": "img#i3",
+     "winIn": true
+    },
+    "o1": {
+     "bare": "object#o1",
+     "doc": "object#o1",
+     "docIn": true,
+     "win": "object#o1",
+     "winIn": true
+    },
+    "o2": {
+     "bare": "object[o2]",
+     "doc": "object[o2]",
+     "docIn": true,
+     "win": "object[o2]",
+     "winIn": true
+    },
+    "s1": {
+     "bare": "ReferenceError",
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false
+    },
+    "svgr": {
+     "bare": "rect#svgr",
+     "doc": "undefined",
+     "docIn": false,
+     "win": "rect#svgr",
+     "winIn": true
+    },
+    "title": {
+     "bare": "form[title]",
+     "doc": "form[title]",
+     "docIn": true,
+     "win": "form[title]",
+     "winIn": true
+    },
+    "x1": {
+     "bare": "ReferenceError",
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false
+    }
+   },
+   "tag": "[object HTMLDocument]"
+  },
+  "named.xhtml@load": {
+   "contentType": "application/xhtml+xml",
+   "inline": {
+    "bare": "object",
+    "doc": "object",
+    "win": "object"
+   },
+   "names": {
+    "cookie": {
+     "bare": "form[cookie]",
+     "doc": "form[cookie]",
+     "docIn": true,
+     "win": "form[cookie]",
+     "winIn": true
+    },
+    "d1": {
+     "bare": "div#d1",
+     "doc": "undefined",
+     "docIn": false,
+     "win": "div#d1",
+     "winIn": true
+    },
+    "dup": {
+     "bare": "collection(2)",
+     "doc": "collection(2)",
+     "docIn": true,
+     "win": "collection(2)",
+     "winIn": true
+    },
+    "e1": {
+     "bare": "embed[e1]",
+     "doc": "embed[e1]",
+     "docIn": true,
+     "win": "embed[e1]",
+     "winIn": true
+    },
+    "f1": {
+     "bare": "form[f1]",
+     "doc": "form[f1]",
+     "docIn": true,
+     "win": "form[f1]",
+     "winIn": true
+    },
+    "fr1": {
+     "bare": "ReferenceError",
+     "doc": "window",
+     "docIn": true,
+     "win": "undefined",
+     "winIn": false
+    },
+    "i1": {
+     "bare": "img[i1]",
+     "doc": "img[i1]",
+     "docIn": true,
+     "win": "img[i1]",
+     "winIn": true
+    },
+    "i2": {
+     "bare": "img#i2[i2n]",
+     "doc": "img#i2[i2n]",
+     "docIn": true,
+     "win": "img#i2[i2n]",
+     "winIn": true
+    },
+    "i2n": {
+     "bare": "img#i2[i2n]",
+     "doc": "img#i2[i2n]",
+     "docIn": true,
+     "win": "img#i2[i2n]",
+     "winIn": true
+    },
+    "i3": {
+     "bare": "img#i3",
+     "doc": "undefined",
+     "docIn": false,
+     "win": "img#i3",
+     "winIn": true
+    },
+    "o1": {
+     "bare": "object#o1",
+     "doc": "object#o1",
+     "docIn": true,
+     "win": "object#o1",
+     "winIn": true
+    },
+    "o2": {
+     "bare": "object[o2]",
+     "doc": "object[o2]",
+     "docIn": true,
+     "win": "object[o2]",
+     "winIn": true
+    },
+    "s1": {
+     "bare": "ReferenceError",
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false
+    },
+    "svgr": {
+     "bare": "rect#svgr",
+     "doc": "undefined",
+     "docIn": false,
+     "win": "rect#svgr",
+     "winIn": true
+    },
+    "title": {
+     "bare": "form[title]",
+     "doc": "form[title]",
+     "docIn": true,
+     "win": "form[title]",
+     "winIn": true
+    },
+    "x1": {
+     "bare": "ReferenceError",
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false
+    }
+   },
+   "tag": "[object HTMLDocument]"
+  },
+  "named.html": {
+   "contentType": "text/html",
+   "inline": {
+    "bare": "object",
+    "doc": "object",
+    "win": "object"
+   },
+   "names": {
+    "cookie": {
+     "bare": "form[cookie]",
+     "doc": "form[cookie]",
+     "docIn": true,
+     "win": "form[cookie]",
+     "winIn": true
+    },
+    "d1": {
+     "bare": "div#d1",
+     "doc": "undefined",
+     "docIn": false,
+     "win": "div#d1",
+     "winIn": true
+    },
+    "dup": {
+     "bare": "collection(2)",
+     "doc": "collection(2)",
+     "docIn": true,
+     "win": "collection(2)",
+     "winIn": true
+    },
+    "e1": {
+     "bare": "embed[e1]",
+     "doc": "embed[e1]",
+     "docIn": true,
+     "win": "embed[e1]",
+     "winIn": true
+    },
+    "f1": {
+     "bare": "form[f1]",
+     "doc": "form[f1]",
+     "docIn": true,
+     "win": "form[f1]",
+     "winIn": true
+    },
+    "fr1": {
+     "bare": "window",
+     "doc": "window",
+     "docIn": true,
+     "win": "window",
+     "winIn": true
+    },
+    "i1": {
+     "bare": "img[i1]",
+     "doc": "img[i1]",
+     "docIn": true,
+     "win": "img[i1]",
+     "winIn": true
+    },
+    "i2": {
+     "bare": "img#i2[i2n]",
+     "doc": "img#i2[i2n]",
+     "docIn": true,
+     "win": "img#i2[i2n]",
+     "winIn": true
+    },
+    "i2n": {
+     "bare": "img#i2[i2n]",
+     "doc": "img#i2[i2n]",
+     "docIn": true,
+     "win": "img#i2[i2n]",
+     "winIn": true
+    },
+    "i3": {
+     "bare": "img#i3",
+     "doc": "undefined",
+     "docIn": false,
+     "win": "img#i3",
+     "winIn": true
+    },
+    "o1": {
+     "bare": "object#o1",
+     "doc": "object#o1",
+     "docIn": true,
+     "win": "object#o1",
+     "winIn": true
+    },
+    "o2": {
+     "bare": "object[o2]",
+     "doc": "object[o2]",
+     "docIn": true,
+     "win": "object[o2]",
+     "winIn": true
+    },
+    "s1": {
+     "bare": "ReferenceError",
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false
+    },
+    "svgr": {
+     "bare": "svg:rect#svgr",
+     "doc": "undefined",
+     "docIn": false,
+     "win": "svg:rect#svgr",
+     "winIn": true
+    },
+    "title": {
+     "bare": "form[title]",
+     "doc": "form[title]",
+     "docIn": true,
+     "win": "form[title]",
+     "winIn": true
+    },
+    "x1": {
+     "bare": "ReferenceError",
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false
+    }
+   },
+   "tag": "[object HTMLDocument]"
+  },
+  "named.html@load": {
+   "contentType": "text/html",
+   "inline": {
+    "bare": "object",
+    "doc": "object",
+    "win": "object"
+   },
+   "names": {
+    "cookie": {
+     "bare": "form[cookie]",
+     "doc": "form[cookie]",
+     "docIn": true,
+     "win": "form[cookie]",
+     "winIn": true
+    },
+    "d1": {
+     "bare": "div#d1",
+     "doc": "undefined",
+     "docIn": false,
+     "win": "div#d1",
+     "winIn": true
+    },
+    "dup": {
+     "bare": "collection(2)",
+     "doc": "collection(2)",
+     "docIn": true,
+     "win": "collection(2)",
+     "winIn": true
+    },
+    "e1": {
+     "bare": "embed[e1]",
+     "doc": "embed[e1]",
+     "docIn": true,
+     "win": "embed[e1]",
+     "winIn": true
+    },
+    "f1": {
+     "bare": "form[f1]",
+     "doc": "form[f1]",
+     "docIn": true,
+     "win": "form[f1]",
+     "winIn": true
+    },
+    "fr1": {
+     "bare": "window",
+     "doc": "window",
+     "docIn": true,
+     "win": "window",
+     "winIn": true
+    },
+    "i1": {
+     "bare": "img[i1]",
+     "doc": "img[i1]",
+     "docIn": true,
+     "win": "img[i1]",
+     "winIn": true
+    },
+    "i2": {
+     "bare": "img#i2[i2n]",
+     "doc": "img#i2[i2n]",
+     "docIn": true,
+     "win": "img#i2[i2n]",
+     "winIn": true
+    },
+    "i2n": {
+     "bare": "img#i2[i2n]",
+     "doc": "img#i2[i2n]",
+     "docIn": true,
+     "win": "img#i2[i2n]",
+     "winIn": true
+    },
+    "i3": {
+     "bare": "img#i3",
+     "doc": "undefined",
+     "docIn": false,
+     "win": "img#i3",
+     "winIn": true
+    },
+    "o1": {
+     "bare": "object#o1",
+     "doc": "object#o1",
+     "docIn": true,
+     "win": "object#o1",
+     "winIn": true
+    },
+    "o2": {
+     "bare": "object[o2]",
+     "doc": "object[o2]",
+     "docIn": true,
+     "win": "object[o2]",
+     "winIn": true
+    },
+    "s1": {
+     "bare": "ReferenceError",
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false
+    },
+    "svgr": {
+     "bare": "svg:rect#svgr",
+     "doc": "undefined",
+     "docIn": false,
+     "win": "svg:rect#svgr",
+     "winIn": true
+    },
+    "title": {
+     "bare": "form[title]",
+     "doc": "form[title]",
+     "docIn": true,
+     "win": "form[title]",
+     "winIn": true
+    },
+    "x1": {
+     "bare": "ReferenceError",
+     "doc": "undefined",
+     "docIn": false,
+     "win": "undefined",
+     "winIn": false
+    }
+   },
+   "tag": "[object HTMLDocument]"
+  },
+  "version": "162.0a1"
+ }
+}

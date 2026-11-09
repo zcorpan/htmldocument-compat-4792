@@ -1,6 +1,7 @@
 # Compat impact of the document interfaces in whatwg/html#4792
 
-Three candidates (named properties such as `document.foo` are out of scope):
+Three candidates for the interfaces (named access such as `document.foo` is in
+[section 3](#3-named-access-on-xhtml-documentfoo-windowfoo)):
 
 1. Chrome and Safari make navigated `application/xhtml+xml` documents `HTMLDocument`, as Firefox
    does. Today they are `XMLDocument`.
@@ -14,7 +15,9 @@ Three candidates (named properties such as `document.foo` are out of scope):
    1).
 
 Current behavior per document type, in the spec, Firefox Nightly 162 and Chrome Canary 159:
-[browsers.md](browsers.md). The two browsers differ only for navigated XHTML documents.
+[browsers.md](browsers.md). The two browsers differ only for navigated XHTML documents: in the
+interface, and in named access (`document.foo`, `window.foo`), which Firefox has there and Chrome
+doesn't.
 
 ## Summary
 
@@ -64,6 +67,12 @@ What would break is Firefox's own: Reader View is offered only when `HTMLDocumen
 so XHTML pages would lose both unless those checks change. XHTML documents would also lose
 `HTMLDocument`'s named getter (out of scope here; Chrome and Safari lack it on XHTML too). Page
 code that only runs in Firefox, and Firefox extensions, weren't traced.
+
+Named access on XHTML (section 3) looks safe to change in either direction. Firefox gives navigated
+XHTML documents `document.foo` and `window.foo` for named elements and ids, as the spec does;
+Chrome and Safari give neither. Traced on the 683 XHTML URLs in the crawl (618 still served as
+XHTML in Firefox Nightly, 880 visits in Chrome Canary), scripts read such a name on 3 pages, and
+none of the reads changes what the script does.
 
 ## Scope
 
@@ -134,6 +143,52 @@ code-reviewed: [code-review.md](code-review.md). The B1 groups are also candidat
 (Firefox today matches B1 on XHTML, candidate 3 matches A). The avplayer schema error also appeared on 3
 targeted pages, where the player sat behind a consent dialog.
 
+## 3. Named access on XHTML (`document.foo`, `window.foo`)
+
+In navigated XHTML documents Firefox has `document.foo` for named elements (`form`, `img`,
+`embed`, `object` and `iframe` with `name`, `object` with `id`, `img` with `id` and `name`) and
+`window.foo` or bare `foo` for named elements and any element with an `id`, as in text/html and
+as the spec says for every `Document`. Chrome and Safari tie both to their `HTMLDocument` class,
+so XHTML documents get `undefined` (and a `ReferenceError` for bare `foo`); only iframes by name
+work there. Details and source links: [browsers.md](browsers.md#named-access-on-navigated-xhtml-documents).
+A side finding: in Firefox an XHTML iframe's `name` isn't on its browsing context at first
+(`frames[0].name` stays `""` for an `about:blank` iframe), so `window.<iframe name>` gives the
+iframe element or `undefined` instead of its window.
+
+Two directions: Chrome and Safari add named access to XHTML (the spec), or Firefox drops it.
+
+- No local data covers this: whatwg/html#10687's research (`~/git/zcorpan/document-shadowing-compat-10687`)
+  has no XHTML pages (Chrome's counter there can't fire on XHTML and its Common Crawl scan was
+  text/html only), and none of the 16 Common Crawl XHTML responses has inline script reading a
+  named element ([cc_named.jsonl](crawl/cc_named.jsonl), `cc_named.py`). Crawl response bodies
+  would cost about 106 TiB for mobile alone, so no new query was run.
+- `named.js` traces reads of names that named elements provide. In Chrome ('emulate' mode) it adds
+  Firefox's named access, so Chrome code paths see the elements and their reads are logged; in
+  Firefox ('trace' mode) it logs window and bare reads with Firefox's own values. Both were checked
+  against Firefox's native behavior on [tests/named.xhtml](tests/named.xhtml)
+  (`tests/named_probe.py`, `tests/named-probe-*.json`). Firefox ran with
+  `dom.document.name_getter_prevent_shadowing.enabled` off, as in release.
+- Detection on every XHTML main document in the 2026-10-01 crawl
+  ([xhtml-all.jsonl](crawl/samples/xhtml-all.jsonl): 1,050 rows, 683 distinct URLs, 593 rows root
+  pages): Chrome Canary 1,050 visits with the crawl clients' emulation (880 still XHTML;
+  [detect-chrome.jsonl](out-named/detect-chrome.jsonl)), Firefox Nightly 683 desktop visits (618
+  still XHTML, 522 with at least one named element or id; [detect-firefox.jsonl](out-named/detect-firefox.jsonl)).
+  Groups: [detect-groups.csv](out-named/detect-groups.csv).
+
+| Page | Read | Chrome today | Firefox, spec | Outcome |
+|---|---|---|---|---|
+| mpk-krasnik.pl | gtag.js reads `window.ga` (`<span id=ga>`) | undefined | the span | same: gtag uses it only if its `.q` is an array |
+| mpk-krasnik.pl | jQuery's UMD check reads `module` (`<div id=module>`, Firefox trace only) | undefined | the div | same: `module.exports` isn't an object, so jQuery takes the browser path |
+| scalablebrainatlas.incf.org | the page reads `window.TEMPLATE` (`<iframe name=TEMPLATE id=TEMPLATE>`) | the iframe's window | the iframe's window (spec); early reads in Firefox: the iframe element | same per spec; in Firefox the page works once the frame has its name |
+| diverzanti.cz | AdSense reads `window.google_esf` (its own iframe) | the iframe's window | as left (spec); early reads in Firefox: the iframe element | same per spec |
+
+A/B in Chrome on these 3 pages (A, A2 plain, B with Firefox's named access;
+[review](out-named-chrome/review.csv)): no visible change on any. So neither direction shows
+breakage: 0 of 618 XHTML pages in Firefox and 0 of 880 visits in Chrome (95% upper bound about
+0.5% of XHTML pages). Document named reads (as opposed to window and bare ones) are traced in
+Chrome only: Firefox reports a current named element as an own property of `document`, so the
+trace leaves those alone; 70 of the 618 pages had a document-named element.
+
 ## Not covered
 
 - Pages the crawl doesn't visit, logged-in state, and interaction (e.g. Adobe's checkout with
@@ -142,6 +197,10 @@ targeted pages, where the player sat behind a consent dialog.
   frame documents when they're accessed).
 - Error-stack strings: V8 names frames like `HTMLDocument.<anonymous>`, which a few error filters
   match. The emulation can't change that.
+- Named access: reads before the element exists (both browsers give undefined), reads after load
+  plus 3 s or on interaction, frames (top-level documents only), and Safari (its source matches
+  Chrome's). The Chrome emulation changes `'foo' in node` to true for every node while an element
+  with that id exists, and missed one read that Firefox's trace saw (`module` on mpk-krasnik.pl).
 - Firefox wasn't run on the XHTML sample, for candidate 1 or 3: it already ships candidate 1, B1
   found nothing to confirm, and the Chrome trace stands in for candidate 3. So Firefox-only page
   code (UA- or Gecko-sniffed branches) and Firefox extensions on XHTML pages weren't observed.
@@ -174,6 +233,11 @@ CHANGE_VARIANT=B2 .venv/bin/python compare.py "$CHROME" crawl/samples/random.jso
 python3 extrapolate.py out-random-b2/review.csv crawl/samples/random.jsonl > out-random-b2/summary.md
 .venv/bin/python build_dossiers.py B2 out-random-b2 out-targeted-b2 out-sub-b2   # code review input
 CHANGE_VARIANT=B2 .venv/bin/python trace_check.py "$CHROME" react-tooltip.html
+.venv/bin/python tests/named_probe.py --ff-pref-off   # named access probe; pass a named.js copy with __MODE__ set to check the modes
+CHANGE_VARIANT=N .venv/bin/python detect_chrome.py "$CHROME" crawl/samples/xhtml-all.jsonl out-named/detect-chrome.jsonl 8
+.venv/bin/python detect_firefox.py crawl/samples/xhtml-all.jsonl out-named/detect-firefox.jsonl 5
+.venv/bin/python named_summary.py out-named/detect-chrome.jsonl out-named/detect-firefox.jsonl > out-named/detect-groups.csv
+CHANGE_VARIANT=N .venv/bin/python compare.py "$CHROME" crawl/samples/named-hits.jsonl out-named-chrome && CHANGE_VARIANT=N .venv/bin/python analyze.py out-named-chrome
 ```
 
 Playwright 1.64.1, Chrome Canary 159.0.8145.0. Partway through the B1 XML run, `compare.py` was

@@ -1,0 +1,4 @@
+idx,stratum,page,auto_rating,reason,textRatioAA2,textRatioAB,pixAA2,pixAB,new_errors_in_B
+0,chrome-hit,https://www.mpk-krasnik.pl/,no visible change,A vs B within A vs A2 noise,1.0,1.0,0.0031,0.0,
+1,chrome-hit,https://www.diverzanti.cz/kontakt,no visible change,A vs B within A vs A2 noise,1.0,1.0,0.0006,0.0004,
+2,chrome-hit,https://scalablebrainatlas.incf.org/mouse/ABA_v3,,differs; needs review,0.243,0.17,0.0647,0.0484,

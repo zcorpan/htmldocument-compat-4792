@@ -1,0 +1,4 @@
+idx,stratum,page,rating,method,note
+0,chrome-hit,https://www.mpk-krasnik.pl/,no visible change,auto,A vs B within A vs A2 noise
+1,chrome-hit,https://www.diverzanti.cz/kontakt,no visible change,auto,A vs B within A vs A2 noise
+2,chrome-hit,https://scalablebrainatlas.incf.org/mouse/ABA_v3,no visible change,manual,random atlas slice per load; A/A2 differ as much

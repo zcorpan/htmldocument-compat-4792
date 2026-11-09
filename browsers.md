@@ -25,3 +25,24 @@ the `Document` interface object, so its name is "Document", every document is
 
 `instanceof` across realms (parent page checking an iframe's document against its own constructors)
 is false in both browsers and under all three candidates; the toString tag works across realms.
+
+## Named access on navigated XHTML documents
+
+From `tests/named.xhtml` and `tests/named.html` (`tests/named_probe.py`, results in
+`tests/named-probe-*.json`), 2026-11-09, Chrome Canary 159 and Firefox Nightly 162 (with
+`dom.document.name_getter_prevent_shadowing.enabled` off, as in release, unless noted).
+
+| Access, in an `application/xhtml+xml` document | Spec | Firefox Nightly | Chrome Canary |
+|---|---|---|---|
+| `document.foo` for `<form name=foo>`, `<img name>`, `<embed name>`, `<object name>` or `<object id>`, `<img id name>`, `<iframe name>` | element (iframe: its window) | same as spec | undefined |
+| `document.title` with `<form name=title>` (named element shadows a `Document` member) | the form | the form (Nightly default: the string) | the string |
+| `window.foo` and bare `foo` for an element with `id=foo` (any namespace), or `<form name>`, `<img name>`, `<embed name>`, `<object name>` | element | same as spec | undefined, and bare `foo` throws a `ReferenceError` |
+| `window.foo` for `<iframe name=foo>` | the iframe's window | undefined (the child browsing context's name stays empty) | the iframe's window |
+
+In text/html documents both browsers follow the spec for all of these, except that Firefox
+Nightly's default doesn't let named elements shadow `Document` members. Chrome's and WebKit's
+document and window named items only exist for documents of their `HTMLDocument` class
+(Blink [`window_properties.cc`](https://chromium.googlesource.com/chromium/src/+/6ca4e60b94475fa916dfb688608e6cc72693a1bf/third_party/blink/renderer/core/frame/window_properties.cc#72),
+WebKit [`JSDOMWindowProperties.cpp`](https://github.com/WebKit/WebKit/blob/15cb3560da6c863025957fce3ee065cf61902e75/Source/WebCore/bindings/js/JSDOMWindowProperties.cpp#L66)),
+which navigated XHTML documents aren't; Gecko allows any HTML or XHTML document
+([`WindowNamedPropertiesHandler.cpp`](https://github.com/mozilla-firefox/firefox/blob/b16e2e7707150c623c413326c14c5111f930e920/dom/base/WindowNamedPropertiesHandler.cpp#L138)).
