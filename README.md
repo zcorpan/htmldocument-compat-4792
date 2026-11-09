@@ -189,6 +189,32 @@ breakage: 0 of 618 XHTML pages in Firefox and 0 of 880 visits in Chrome (95% upp
 Chrome only: Firefox reports a current named element as an own property of `document`, so the
 trace leaves those alone; 70 of the 618 pages had a document-named element.
 
+## 4. Checks for Firefox adopting the Chrome/Safari model
+
+- Safari TP 255 matches Chrome Canary 159 on every interface and named access probe
+  ([browsers.md](browsers.md#all-three-browsers-including-safari-tp)), so Chrome and Safari share
+  one model.
+- No browser has named access in XML or SVG documents, though the spec gives it to every
+  `Document`. The spec would need to limit `document.foo` to HTML documents (an `HTMLDocument`
+  named getter) and window named access to windows whose document is an HTML document.
+- Chrome alone lacks `document.foo` in HTML documents without a browsing context (DOMParser, XHR,
+  `createHTMLDocument()`, `parseHTMLUnsafe()`); Firefox and Safari have it, which an `HTMLDocument`
+  named getter matches. This is the Chromium bug whatwg/html#4792 links (594008).
+- Firefox drops an iframe's `name` from its browsing context in every XML-parsed document (XHTML,
+  XML, SVG): `window.<iframe name>` is undefined there, while Chrome and Safari return its window.
+  That's a Firefox bug either way.
+- History: from Web Apps 1.0's first check-in (2006) every `Document` had to implement
+  `HTMLDocument`, through binding-specific casting, so its members (`title`, `cookie`, the named
+  getter) would work in any document, SVG and XML included. W3C bug 14037 (2011, about
+  `XMLDocument` and Sarissa's `XMLDocument.prototype.load` hook) turned that into
+  `HTMLDocument === Document`, with `XMLDocument` only from `createDocument()` (commit 83f13eef).
+  Gecko had no plans to implement it, and WebKit preferred navigated `.svg` and `.xhtml`
+  documents to be `XMLDocument`; no browser ever implemented the alias. All former `HTMLDocument`
+  members except the named getter now live on `Document` in all three browsers, so the original
+  motivation is met without the alias. whatwg/html#4792 (Boris Zbarsky, 2019) proposed bringing
+  back `HTMLDocument` with the named getter, because named properties on XML documents (with
+  `[LegacyOverrideBuiltIns]`) would be a compat risk.
+
 ## Not covered
 
 - Pages the crawl doesn't visit, logged-in state, and interaction (e.g. Adobe's checkout with

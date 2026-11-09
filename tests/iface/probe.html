@@ -1,0 +1,59 @@
+<!doctype html>
+<meta charset=utf-8>
+<title>document interfaces and named access probe</title>
+<body>
+<script>
+function desc(d, w) {
+  try {
+    const chain = [];
+    for (let p = Object.getPrototypeOf(d); p; p = Object.getPrototypeOf(p)) chain.push(p.constructor && p.constructor.name);
+    return {tag: Object.prototype.toString.call(d), chain: chain.slice(0, 2).join('>'), ctor: d.constructor.name,
+            iHTML: d instanceof w.HTMLDocument, iXML: d instanceof w.XMLDocument, contentType: d.contentType};
+  } catch (e) { return 'ERR ' + e; }
+}
+function named(w) {
+  const d = w.document, out = {};
+  const v = x => x === undefined ? 'undefined' : x === null ? 'null' : (x && x.window === x) ? 'window' : (x instanceof w.Element) ? x.localName : (x && 'length' in x && 'item' in x) ? 'collection' : typeof x;
+  for (const n of ['hf', 'hd', 'hi', 'hfr', 'xi']) {
+    let bare; try { bare = v(w.eval(n)); } catch (e) { bare = e.name; }
+    out[n] = {doc: v(d[n]), win: v(w[n]), bare};
+  }
+  return out;
+}
+const load = (f, src) => new Promise(r => { f.onload = r; f.src = src; document.body.append(f); setTimeout(r, 4000); });
+(async () => {
+  const out = {ua: navigator.userAgent, alias: HTMLDocument === Document, htmlDocName: HTMLDocument.name,
+               htmlProtoOwn: Reflect.ownKeys(HTMLDocument.prototype).map(String), xmlProtoOwn: Reflect.ownKeys(XMLDocument.prototype).map(String),
+               top: desc(document, window), navigated: {}, named: {}, parsed: {}, xhr: {}, created: {}};
+  for (const file of ['doc.html', 'doc.xhtml', 'doc.xml', 'doc.svg']) {
+    const f = document.createElement('iframe');
+    await load(f, file);
+    await new Promise(r => setTimeout(r, 300));
+    out.navigated[file] = desc(f.contentDocument, f.contentWindow);
+    out.named[file] = named(f.contentWindow);
+  }
+  const p = new DOMParser();
+  for (const t of ['text/html', 'application/xhtml+xml', 'text/xml', 'application/xml', 'image/svg+xml'])
+    out.parsed[t] = desc(p.parseFromString(t === 'image/svg+xml' ? '<svg xmlns="http://www.w3.org/2000/svg"/>' : '<html xmlns="http://www.w3.org/1999/xhtml"><body/></html>', t), window);
+  for (const file of ['doc.html', 'doc.xhtml', 'doc.xml', 'doc.svg']) {
+    const x = new XMLHttpRequest(); x.open('GET', file); x.responseType = 'document';
+    await new Promise(r => { x.onload = x.onerror = r; x.send(); });
+    out.xhr[file] = x.responseXML ? desc(x.responseXML, window) : 'null';
+  }
+  const impl = document.implementation;
+  out.created = {createDocument: desc(impl.createDocument(null, null), window), createDocumentXHTML: desc(impl.createDocument('http://www.w3.org/1999/xhtml', 'html'), window),
+    createHTMLDocument: desc(impl.createHTMLDocument(''), window), newDocument: desc(new Document(), window),
+    parseHTMLUnsafe: Document.parseHTMLUnsafe ? desc(Document.parseHTMLUnsafe('<p>'), window) : 'n/a'};
+  const v = x => x === undefined ? 'undefined' : (x instanceof Element) ? x.localName : typeof x;
+  const parsedHtml = p.parseFromString('<form name="hf"></form><div id="hd"></div>', 'text/html');
+  const created = impl.createHTMLDocument(''); created.body.innerHTML = '<form name="hf"></form>';
+  const xh = new XMLHttpRequest(); xh.open('GET', 'doc.html'); xh.responseType = 'document';
+  await new Promise(r => { xh.onload = xh.onerror = r; xh.send(); });
+  const xx = new XMLHttpRequest(); xx.open('GET', 'doc.xhtml'); xx.responseType = 'document';
+  await new Promise(r => { xx.onload = xx.onerror = r; xx.send(); });
+  out.namedNoBC = {parsedHtml: v(parsedHtml.hf), createHTMLDocument: v(created.hf), xhrHtml: v(xh.responseXML.hf), xhrXhtml: v(xx.responseXML.hf),
+    parseHTMLUnsafe: Document.parseHTMLUnsafe ? v(Document.parseHTMLUnsafe('<form name="hf"></form>').hf) : 'n/a',
+    parsedXhtml: v(p.parseFromString('<html xmlns="http://www.w3.org/1999/xhtml"><body><form name="hf"/></body></html>', 'application/xhtml+xml').hf)};
+  window.__probe = out;
+})();
+</script>

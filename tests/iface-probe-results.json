@@ -1,0 +1,875 @@
+{
+ "chrome": {
+  "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/159.0.0.0 Safari/537.36",
+  "alias": false,
+  "htmlDocName": "HTMLDocument",
+  "htmlProtoOwn": [
+   "constructor",
+   "Symbol(Symbol.toStringTag)"
+  ],
+  "xmlProtoOwn": [
+   "constructor",
+   "Symbol(Symbol.toStringTag)"
+  ],
+  "top": {
+   "tag": "[object HTMLDocument]",
+   "chain": "HTMLDocument>Document",
+   "ctor": "HTMLDocument",
+   "iHTML": true,
+   "iXML": false,
+   "contentType": "text/html"
+  },
+  "navigated": {
+   "doc.html": {
+    "tag": "[object HTMLDocument]",
+    "chain": "HTMLDocument>Document",
+    "ctor": "HTMLDocument",
+    "iHTML": true,
+    "iXML": false,
+    "contentType": "text/html"
+   },
+   "doc.xhtml": {
+    "tag": "[object XMLDocument]",
+    "chain": "XMLDocument>Document",
+    "ctor": "XMLDocument",
+    "iHTML": false,
+    "iXML": true,
+    "contentType": "application/xhtml+xml"
+   },
+   "doc.xml": {
+    "tag": "[object XMLDocument]",
+    "chain": "XMLDocument>Document",
+    "ctor": "XMLDocument",
+    "iHTML": false,
+    "iXML": true,
+    "contentType": "application/xml"
+   },
+   "doc.svg": {
+    "tag": "[object XMLDocument]",
+    "chain": "XMLDocument>Document",
+    "ctor": "XMLDocument",
+    "iHTML": false,
+    "iXML": true,
+    "contentType": "image/svg+xml"
+   }
+  },
+  "named": {
+   "doc.html": {
+    "hf": {
+     "doc": "form",
+     "win": "form",
+     "bare": "form"
+    },
+    "hd": {
+     "doc": "undefined",
+     "win": "div",
+     "bare": "div"
+    },
+    "hi": {
+     "doc": "img",
+     "win": "img",
+     "bare": "img"
+    },
+    "hfr": {
+     "doc": "window",
+     "win": "window",
+     "bare": "window"
+    },
+    "xi": {
+     "doc": "undefined",
+     "win": "undefined",
+     "bare": "ReferenceError"
+    }
+   },
+   "doc.xhtml": {
+    "hf": {
+     "doc": "undefined",
+     "win": "undefined",
+     "bare": "ReferenceError"
+    },
+    "hd": {
+     "doc": "undefined",
+     "win": "undefined",
+     "bare": "ReferenceError"
+    },
+    "hi": {
+     "doc": "undefined",
+     "win": "undefined",
+     "bare": "ReferenceError"
+    },
+    "hfr": {
+     "doc": "undefined",
+     "win": "window",
+     "bare": "window"
+    },
+    "xi": {
+     "doc": "undefined",
+     "win": "undefined",
+     "bare": "ReferenceError"
+    }
+   },
+   "doc.xml": {
+    "hf": {
+     "doc": "undefined",
+     "win": "undefined",
+     "bare": "ReferenceError"
+    },
+    "hd": {
+     "doc": "undefined",
+     "win": "undefined",
+     "bare": "ReferenceError"
+    },
+    "hi": {
+     "doc": "undefined",
+     "win": "undefined",
+     "bare": "ReferenceError"
+    },
+    "hfr": {
+     "doc": "undefined",
+     "win": "window",
+     "bare": "window"
+    },
+    "xi": {
+     "doc": "undefined",
+     "win": "undefined",
+     "bare": "ReferenceError"
+    }
+   },
+   "doc.svg": {
+    "hf": {
+     "doc": "undefined",
+     "win": "undefined",
+     "bare": "ReferenceError"
+    },
+    "hd": {
+     "doc": "undefined",
+     "win": "undefined",
+     "bare": "ReferenceError"
+    },
+    "hi": {
+     "doc": "undefined",
+     "win": "undefined",
+     "bare": "ReferenceError"
+    },
+    "hfr": {
+     "doc": "undefined",
+     "win": "window",
+     "bare": "window"
+    },
+    "xi": {
+     "doc": "undefined",
+     "win": "undefined",
+     "bare": "ReferenceError"
+    }
+   }
+  },
+  "parsed": {
+   "text/html": {
+    "tag": "[object HTMLDocument]",
+    "chain": "HTMLDocument>Document",
+    "ctor": "HTMLDocument",
+    "iHTML": true,
+    "iXML": false,
+    "contentType": "text/html"
+   },
+   "application/xhtml+xml": {
+    "tag": "[object XMLDocument]",
+    "chain": "XMLDocument>Document",
+    "ctor": "XMLDocument",
+    "iHTML": false,
+    "iXML": true,
+    "contentType": "application/xhtml+xml"
+   },
+   "text/xml": {
+    "tag": "[object XMLDocument]",
+    "chain": "XMLDocument>Document",
+    "ctor": "XMLDocument",
+    "iHTML": false,
+    "iXML": true,
+    "contentType": "text/xml"
+   },
+   "application/xml": {
+    "tag": "[object XMLDocument]",
+    "chain": "XMLDocument>Document",
+    "ctor": "XMLDocument",
+    "iHTML": false,
+    "iXML": true,
+    "contentType": "application/xml"
+   },
+   "image/svg+xml": {
+    "tag": "[object XMLDocument]",
+    "chain": "XMLDocument>Document",
+    "ctor": "XMLDocument",
+    "iHTML": false,
+    "iXML": true,
+    "contentType": "image/svg+xml"
+   }
+  },
+  "xhr": {
+   "doc.html": {
+    "tag": "[object HTMLDocument]",
+    "chain": "HTMLDocument>Document",
+    "ctor": "HTMLDocument",
+    "iHTML": true,
+    "iXML": false,
+    "contentType": "text/html"
+   },
+   "doc.xhtml": {
+    "tag": "[object XMLDocument]",
+    "chain": "XMLDocument>Document",
+    "ctor": "XMLDocument",
+    "iHTML": false,
+    "iXML": true,
+    "contentType": "application/xhtml+xml"
+   },
+   "doc.xml": {
+    "tag": "[object XMLDocument]",
+    "chain": "XMLDocument>Document",
+    "ctor": "XMLDocument",
+    "iHTML": false,
+    "iXML": true,
+    "contentType": "application/xml"
+   },
+   "doc.svg": {
+    "tag": "[object XMLDocument]",
+    "chain": "XMLDocument>Document",
+    "ctor": "XMLDocument",
+    "iHTML": false,
+    "iXML": true,
+    "contentType": "image/svg+xml"
+   }
+  },
+  "created": {
+   "createDocument": {
+    "tag": "[object XMLDocument]",
+    "chain": "XMLDocument>Document",
+    "ctor": "XMLDocument",
+    "iHTML": false,
+    "iXML": true,
+    "contentType": "application/xml"
+   },
+   "createDocumentXHTML": {
+    "tag": "[object XMLDocument]",
+    "chain": "XMLDocument>Document",
+    "ctor": "XMLDocument",
+    "iHTML": false,
+    "iXML": true,
+    "contentType": "application/xhtml+xml"
+   },
+   "createHTMLDocument": {
+    "tag": "[object HTMLDocument]",
+    "chain": "HTMLDocument>Document",
+    "ctor": "HTMLDocument",
+    "iHTML": true,
+    "iXML": false,
+    "contentType": "text/html"
+   },
+   "newDocument": {
+    "tag": "[object Document]",
+    "chain": "Document>Node",
+    "ctor": "Document",
+    "iHTML": false,
+    "iXML": false,
+    "contentType": "application/xml"
+   },
+   "parseHTMLUnsafe": {
+    "tag": "[object HTMLDocument]",
+    "chain": "HTMLDocument>Document",
+    "ctor": "HTMLDocument",
+    "iHTML": true,
+    "iXML": false,
+    "contentType": "text/html"
+   }
+  },
+  "namedNoBC": {
+   "parsedHtml": "undefined",
+   "createHTMLDocument": "undefined",
+   "xhrHtml": "undefined",
+   "xhrXhtml": "undefined",
+   "parseHTMLUnsafe": "undefined",
+   "parsedXhtml": "undefined"
+  }
+ },
+ "firefox": {
+  "alias": false,
+  "created": {
+   "createDocument": {
+    "chain": "XMLDocument>Document",
+    "contentType": "application/xml",
+    "ctor": "XMLDocument",
+    "iHTML": false,
+    "iXML": true,
+    "tag": "[object XMLDocument]"
+   },
+   "createDocumentXHTML": {
+    "chain": "XMLDocument>Document",
+    "contentType": "application/xhtml+xml",
+    "ctor": "XMLDocument",
+    "iHTML": false,
+    "iXML": true,
+    "tag": "[object XMLDocument]"
+   },
+   "createHTMLDocument": {
+    "chain": "HTMLDocument>Document",
+    "contentType": "text/html",
+    "ctor": "HTMLDocument",
+    "iHTML": true,
+    "iXML": false,
+    "tag": "[object HTMLDocument]"
+   },
+   "newDocument": {
+    "chain": "Document>Node",
+    "contentType": "application/xml",
+    "ctor": "Document",
+    "iHTML": false,
+    "iXML": false,
+    "tag": "[object Document]"
+   },
+   "parseHTMLUnsafe": {
+    "chain": "HTMLDocument>Document",
+    "contentType": "text/html",
+    "ctor": "HTMLDocument",
+    "iHTML": true,
+    "iXML": false,
+    "tag": "[object HTMLDocument]"
+   }
+  },
+  "htmlDocName": "HTMLDocument",
+  "htmlProtoOwn": [
+   "constructor",
+   "Symbol(Symbol.toStringTag)"
+  ],
+  "named": {
+   "doc.html": {
+    "hd": {
+     "bare": "div",
+     "doc": "undefined",
+     "win": "div"
+    },
+    "hf": {
+     "bare": "form",
+     "doc": "form",
+     "win": "form"
+    },
+    "hfr": {
+     "bare": "window",
+     "doc": "window",
+     "win": "window"
+    },
+    "hi": {
+     "bare": "img",
+     "doc": "img",
+     "win": "img"
+    },
+    "xi": {
+     "bare": "ReferenceError",
+     "doc": "undefined",
+     "win": "undefined"
+    }
+   },
+   "doc.svg": {
+    "hd": {
+     "bare": "ReferenceError",
+     "doc": "undefined",
+     "win": "undefined"
+    },
+    "hf": {
+     "bare": "ReferenceError",
+     "doc": "undefined",
+     "win": "undefined"
+    },
+    "hfr": {
+     "bare": "ReferenceError",
+     "doc": "undefined",
+     "win": "undefined"
+    },
+    "hi": {
+     "bare": "ReferenceError",
+     "doc": "undefined",
+     "win": "undefined"
+    },
+    "xi": {
+     "bare": "ReferenceError",
+     "doc": "undefined",
+     "win": "undefined"
+    }
+   },
+   "doc.xhtml": {
+    "hd": {
+     "bare": "div",
+     "doc": "undefined",
+     "win": "div"
+    },
+    "hf": {
+     "bare": "form",
+     "doc": "form",
+     "win": "form"
+    },
+    "hfr": {
+     "bare": "ReferenceError",
+     "doc": "window",
+     "win": "undefined"
+    },
+    "hi": {
+     "bare": "img",
+     "doc": "img",
+     "win": "img"
+    },
+    "xi": {
+     "bare": "ReferenceError",
+     "doc": "undefined",
+     "win": "undefined"
+    }
+   },
+   "doc.xml": {
+    "hd": {
+     "bare": "ReferenceError",
+     "doc": "undefined",
+     "win": "undefined"
+    },
+    "hf": {
+     "bare": "ReferenceError",
+     "doc": "undefined",
+     "win": "undefined"
+    },
+    "hfr": {
+     "bare": "ReferenceError",
+     "doc": "undefined",
+     "win": "undefined"
+    },
+    "hi": {
+     "bare": "ReferenceError",
+     "doc": "undefined",
+     "win": "undefined"
+    },
+    "xi": {
+     "bare": "ReferenceError",
+     "doc": "undefined",
+     "win": "undefined"
+    }
+   }
+  },
+  "namedNoBC": {
+   "createHTMLDocument": "form",
+   "parseHTMLUnsafe": "form",
+   "parsedHtml": "form",
+   "parsedXhtml": "undefined",
+   "xhrHtml": "form",
+   "xhrXhtml": "undefined"
+  },
+  "navigated": {
+   "doc.html": {
+    "chain": "HTMLDocument>Document",
+    "contentType": "text/html",
+    "ctor": "HTMLDocument",
+    "iHTML": true,
+    "iXML": false,
+    "tag": "[object HTMLDocument]"
+   },
+   "doc.svg": {
+    "chain": "XMLDocument>Document",
+    "contentType": "image/svg+xml",
+    "ctor": "XMLDocument",
+    "iHTML": false,
+    "iXML": true,
+    "tag": "[object XMLDocument]"
+   },
+   "doc.xhtml": {
+    "chain": "HTMLDocument>Document",
+    "contentType": "application/xhtml+xml",
+    "ctor": "HTMLDocument",
+    "iHTML": true,
+    "iXML": false,
+    "tag": "[object HTMLDocument]"
+   },
+   "doc.xml": {
+    "chain": "XMLDocument>Document",
+    "contentType": "application/xml",
+    "ctor": "XMLDocument",
+    "iHTML": false,
+    "iXML": true,
+    "tag": "[object XMLDocument]"
+   }
+  },
+  "parsed": {
+   "application/xhtml+xml": {
+    "chain": "XMLDocument>Document",
+    "contentType": "application/xhtml+xml",
+    "ctor": "XMLDocument",
+    "iHTML": false,
+    "iXML": true,
+    "tag": "[object XMLDocument]"
+   },
+   "application/xml": {
+    "chain": "XMLDocument>Document",
+    "contentType": "application/xml",
+    "ctor": "XMLDocument",
+    "iHTML": false,
+    "iXML": true,
+    "tag": "[object XMLDocument]"
+   },
+   "image/svg+xml": {
+    "chain": "XMLDocument>Document",
+    "contentType": "image/svg+xml",
+    "ctor": "XMLDocument",
+    "iHTML": false,
+    "iXML": true,
+    "tag": "[object XMLDocument]"
+   },
+   "text/html": {
+    "chain": "HTMLDocument>Document",
+    "contentType": "text/html",
+    "ctor": "HTMLDocument",
+    "iHTML": true,
+    "iXML": false,
+    "tag": "[object HTMLDocument]"
+   },
+   "text/xml": {
+    "chain": "XMLDocument>Document",
+    "contentType": "text/xml",
+    "ctor": "XMLDocument",
+    "iHTML": false,
+    "iXML": true,
+    "tag": "[object XMLDocument]"
+   }
+  },
+  "top": {
+   "chain": "HTMLDocument>Document",
+   "contentType": "text/html",
+   "ctor": "HTMLDocument",
+   "iHTML": true,
+   "iXML": false,
+   "tag": "[object HTMLDocument]"
+  },
+  "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:162.0) Gecko/20100101 Firefox/162.0",
+  "xhr": {
+   "doc.html": {
+    "chain": "HTMLDocument>Document",
+    "contentType": "text/html",
+    "ctor": "HTMLDocument",
+    "iHTML": true,
+    "iXML": false,
+    "tag": "[object HTMLDocument]"
+   },
+   "doc.svg": {
+    "chain": "XMLDocument>Document",
+    "contentType": "image/svg+xml",
+    "ctor": "XMLDocument",
+    "iHTML": false,
+    "iXML": true,
+    "tag": "[object XMLDocument]"
+   },
+   "doc.xhtml": {
+    "chain": "XMLDocument>Document",
+    "contentType": "application/xhtml+xml",
+    "ctor": "XMLDocument",
+    "iHTML": false,
+    "iXML": true,
+    "tag": "[object XMLDocument]"
+   },
+   "doc.xml": {
+    "chain": "XMLDocument>Document",
+    "contentType": "application/xml",
+    "ctor": "XMLDocument",
+    "iHTML": false,
+    "iXML": true,
+    "tag": "[object XMLDocument]"
+   }
+  },
+  "xmlProtoOwn": [
+   "constructor",
+   "Symbol(Symbol.toStringTag)"
+  ]
+ },
+ "safari": {
+  "namedNoBC": {
+   "xhrXhtml": "undefined",
+   "parseHTMLUnsafe": "form",
+   "parsedXhtml": "undefined",
+   "parsedHtml": "form",
+   "xhrHtml": "form",
+   "createHTMLDocument": "form"
+  },
+  "xmlProtoOwn": [
+   "constructor",
+   "Symbol(Symbol.toStringTag)"
+  ],
+  "htmlDocName": "HTMLDocument",
+  "htmlProtoOwn": [
+   "constructor",
+   "Symbol(Symbol.toStringTag)"
+  ],
+  "parsed": {
+   "application/xhtml+xml": {
+    "iXML": true,
+    "chain": "XMLDocument>Document",
+    "iHTML": false,
+    "contentType": "application/xhtml+xml",
+    "tag": "[object XMLDocument]",
+    "ctor": "XMLDocument"
+   },
+   "text/html": {
+    "iXML": false,
+    "chain": "HTMLDocument>Document",
+    "iHTML": true,
+    "contentType": "text/html",
+    "tag": "[object HTMLDocument]",
+    "ctor": "HTMLDocument"
+   },
+   "application/xml": {
+    "iXML": true,
+    "chain": "XMLDocument>Document",
+    "iHTML": false,
+    "contentType": "application/xml",
+    "tag": "[object XMLDocument]",
+    "ctor": "XMLDocument"
+   },
+   "text/xml": {
+    "iXML": true,
+    "chain": "XMLDocument>Document",
+    "iHTML": false,
+    "contentType": "text/xml",
+    "tag": "[object XMLDocument]",
+    "ctor": "XMLDocument"
+   },
+   "image/svg+xml": {
+    "iXML": true,
+    "chain": "XMLDocument>Document",
+    "iHTML": false,
+    "contentType": "image/svg+xml",
+    "tag": "[object XMLDocument]",
+    "ctor": "XMLDocument"
+   }
+  },
+  "navigated": {
+   "doc.xhtml": {
+    "iXML": true,
+    "chain": "XMLDocument>Document",
+    "iHTML": false,
+    "contentType": "application/xhtml+xml",
+    "tag": "[object XMLDocument]",
+    "ctor": "XMLDocument"
+   },
+   "doc.xml": {
+    "iXML": true,
+    "chain": "XMLDocument>Document",
+    "iHTML": false,
+    "contentType": "application/xml",
+    "tag": "[object XMLDocument]",
+    "ctor": "XMLDocument"
+   },
+   "doc.html": {
+    "iXML": false,
+    "chain": "HTMLDocument>Document",
+    "iHTML": true,
+    "contentType": "text/html",
+    "tag": "[object HTMLDocument]",
+    "ctor": "HTMLDocument"
+   },
+   "doc.svg": {
+    "iXML": true,
+    "chain": "XMLDocument>Document",
+    "iHTML": false,
+    "contentType": "image/svg+xml",
+    "tag": "[object XMLDocument]",
+    "ctor": "XMLDocument"
+   }
+  },
+  "alias": false,
+  "created": {
+   "parseHTMLUnsafe": {
+    "iXML": false,
+    "chain": "HTMLDocument>Document",
+    "iHTML": true,
+    "contentType": "text/html",
+    "tag": "[object HTMLDocument]",
+    "ctor": "HTMLDocument"
+   },
+   "createDocument": {
+    "iXML": true,
+    "chain": "XMLDocument>Document",
+    "iHTML": false,
+    "contentType": "application/xml",
+    "tag": "[object XMLDocument]",
+    "ctor": "XMLDocument"
+   },
+   "newDocument": {
+    "iXML": false,
+    "chain": "Document>Node",
+    "iHTML": false,
+    "contentType": "application/xml",
+    "tag": "[object Document]",
+    "ctor": "Document"
+   },
+   "createDocumentXHTML": {
+    "iXML": true,
+    "chain": "XMLDocument>Document",
+    "iHTML": false,
+    "contentType": "application/xhtml+xml",
+    "tag": "[object XMLDocument]",
+    "ctor": "XMLDocument"
+   },
+   "createHTMLDocument": {
+    "iXML": false,
+    "chain": "HTMLDocument>Document",
+    "iHTML": true,
+    "contentType": "text/html",
+    "tag": "[object HTMLDocument]",
+    "ctor": "HTMLDocument"
+   }
+  },
+  "named": {
+   "doc.xhtml": {
+    "hf": {
+     "doc": "undefined",
+     "win": "undefined",
+     "bare": "ReferenceError"
+    },
+    "hi": {
+     "doc": "undefined",
+     "win": "undefined",
+     "bare": "ReferenceError"
+    },
+    "hfr": {
+     "doc": "undefined",
+     "win": "window",
+     "bare": "window"
+    },
+    "xi": {
+     "doc": "undefined",
+     "win": "undefined",
+     "bare": "ReferenceError"
+    },
+    "hd": {
+     "doc": "undefined",
+     "win": "undefined",
+     "bare": "ReferenceError"
+    }
+   },
+   "doc.xml": {
+    "hf": {
+     "doc": "undefined",
+     "win": "undefined",
+     "bare": "ReferenceError"
+    },
+    "hi": {
+     "doc": "undefined",
+     "win": "undefined",
+     "bare": "ReferenceError"
+    },
+    "hfr": {
+     "doc": "undefined",
+     "win": "window",
+     "bare": "window"
+    },
+    "xi": {
+     "doc": "undefined",
+     "win": "undefined",
+     "bare": "ReferenceError"
+    },
+    "hd": {
+     "doc": "undefined",
+     "win": "undefined",
+     "bare": "ReferenceError"
+    }
+   },
+   "doc.html": {
+    "hf": {
+     "doc": "form",
+     "win": "form",
+     "bare": "form"
+    },
+    "hi": {
+     "doc": "img",
+     "win": "img",
+     "bare": "img"
+    },
+    "hfr": {
+     "doc": "window",
+     "win": "window",
+     "bare": "window"
+    },
+    "xi": {
+     "doc": "undefined",
+     "win": "undefined",
+     "bare": "ReferenceError"
+    },
+    "hd": {
+     "doc": "undefined",
+     "win": "div",
+     "bare": "div"
+    }
+   },
+   "doc.svg": {
+    "hf": {
+     "doc": "undefined",
+     "win": "undefined",
+     "bare": "ReferenceError"
+    },
+    "hi": {
+     "doc": "undefined",
+     "win": "undefined",
+     "bare": "ReferenceError"
+    },
+    "hfr": {
+     "doc": "undefined",
+     "win": "window",
+     "bare": "window"
+    },
+    "xi": {
+     "doc": "undefined",
+     "win": "undefined",
+     "bare": "ReferenceError"
+    },
+    "hd": {
+     "doc": "undefined",
+     "win": "undefined",
+     "bare": "ReferenceError"
+    }
+   }
+  },
+  "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.0 Safari/605.1.15",
+  "xhr": {
+   "doc.xhtml": {
+    "iXML": true,
+    "chain": "XMLDocument>Document",
+    "iHTML": false,
+    "contentType": "application/xhtml+xml",
+    "tag": "[object XMLDocument]",
+    "ctor": "XMLDocument"
+   },
+   "doc.xml": {
+    "iXML": true,
+    "chain": "XMLDocument>Document",
+    "iHTML": false,
+    "contentType": "application/xml",
+    "tag": "[object XMLDocument]",
+    "ctor": "XMLDocument"
+   },
+   "doc.html": {
+    "iXML": false,
+    "chain": "HTMLDocument>Document",
+    "iHTML": true,
+    "contentType": "text/html",
+    "tag": "[object HTMLDocument]",
+    "ctor": "HTMLDocument"
+   },
+   "doc.svg": {
+    "iXML": true,
+    "chain": "XMLDocument>Document",
+    "iHTML": false,
+    "contentType": "image/svg+xml",
+    "tag": "[object XMLDocument]",
+    "ctor": "XMLDocument"
+   }
+  },
+  "top": {
+   "iXML": false,
+   "chain": "HTMLDocument>Document",
+   "iHTML": true,
+   "contentType": "text/html",
+   "tag": "[object HTMLDocument]",
+   "ctor": "HTMLDocument"
+  }
+ }
+}

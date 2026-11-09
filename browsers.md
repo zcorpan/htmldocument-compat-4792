@@ -46,3 +46,21 @@ document and window named items only exist for documents of their `HTMLDocument`
 WebKit [`JSDOMWindowProperties.cpp`](https://github.com/WebKit/WebKit/blob/15cb3560da6c863025957fce3ee065cf61902e75/Source/WebCore/bindings/js/JSDOMWindowProperties.cpp#L66)),
 which navigated XHTML documents aren't; Gecko allows any HTML or XHTML document
 ([`WindowNamedPropertiesHandler.cpp`](https://github.com/mozilla-firefox/firefox/blob/b16e2e7707150c623c413326c14c5111f930e920/dom/base/WindowNamedPropertiesHandler.cpp#L138)).
+
+## All three browsers, including Safari TP
+
+From `tests/iface/probe.html` (`tests/iface_probe.py`, results in `tests/iface-probe-results.json`),
+2026-11-09: Chrome Canary 159, Firefox Nightly 162, Safari TP 255. Safari TP matches Chrome Canary
+on every row: document interfaces (navigated, DOMParser, XHR, `createDocument()`,
+`createHTMLDocument()`, `new Document()`, `parseHTMLUnsafe()`) and named access. Where they differ:
+
+| | Chrome Canary | Firefox Nightly | Safari TP |
+|---|---|---|---|
+| navigated XHTML document's interface | `XMLDocument` | `HTMLDocument` | `XMLDocument` |
+| `document.foo`, `window.foo`, bare `foo` for named elements and ids in a navigated XHTML document | undefined | element | undefined |
+| `window.foo` for `<iframe name=foo>` in a navigated XHTML, XML or SVG document | its window | undefined | its window |
+| `document.foo` for a named element in an HTML document without a browsing context (DOMParser text/html, XHR text/html, `createHTMLDocument()`, `parseHTMLUnsafe()`) | undefined | element | element |
+
+None of the three gives `document.foo`, `window.foo` or bare `foo` for named elements or ids in
+navigated XML or SVG documents (iframes by name aside), or `document.foo` in XHTML documents
+from DOMParser or XHR. The spec gives both to every `Document`.
