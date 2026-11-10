@@ -13,3 +13,4 @@ out*/review-brief.csv
 out-recheck/
 tmp/
 skill-notes.md
+.DS_Store
