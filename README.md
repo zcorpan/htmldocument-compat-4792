@@ -337,6 +337,8 @@ All on the 2026-10-01 crawl (or the 10k sample tables), run on 2026-11-07:
 
 ## Reproduce
 
+This run was done with the [`httparchive` skill](https://github.com/zcorpan/web-platform-skills/blob/main/docs/httparchive.md). The steps below are standalone and rerun the same analysis without the skill.
+
 ```sh
 bq query --use_legacy_sql=false --format=csv --max_rows=10000000 < queries/xml_main_docs.sql > queries/xml_main_docs.csv  # likewise the others
 python3 bq_download.py <bodies_10k result table> 9115 crawl/bodies_10k_raw 50 && python3 classify_bodies.py crawl/bodies_10k_raw crawl/bodies_10k
