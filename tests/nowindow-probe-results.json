@@ -1,0 +1,81 @@
+{
+ "enabled=True": {
+  "probe": {
+   "createHTMLDocument": {
+    "bar": "HTMLCollection(2)",
+    "foo": "[object HTMLFormElement]",
+    "inFoo": true,
+    "ownNames": [
+     "foo",
+     "bar"
+    ]
+   },
+   "domparser": {
+    "bar": "HTMLCollection(2)",
+    "foo": "[object HTMLFormElement]",
+    "inFoo": true,
+    "ownNames": [
+     "foo",
+     "bar"
+    ]
+   },
+   "parseHTMLUnsafe": {
+    "bar": "HTMLCollection(2)",
+    "foo": "[object HTMLFormElement]",
+    "inFoo": true,
+    "ownNames": [
+     "foo",
+     "bar"
+    ]
+   },
+   "top": "[object HTMLImageElement]",
+   "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:162.0) Gecko/20100101 Firefox/162.0",
+   "xhr": {
+    "bar": "undefined",
+    "foo": "[object HTMLFormElement]",
+    "inFoo": true,
+    "ownNames": [
+     "foo"
+    ]
+   }
+  },
+  "counters": [
+   "USE_COUNTER_DOCUMENT: htmldocument_named_getter_hit - http://127.0.0.1:50545/probe.html",
+   "USE_COUNTER_DOCUMENT: htmldocument_named_getter_hit_no_window - http://127.0.0.1:50545/probe.html"
+  ]
+ },
+ "enabled=False": {
+  "probe": {
+   "createHTMLDocument": {
+    "bar": "undefined",
+    "foo": "undefined",
+    "inFoo": false,
+    "ownNames": []
+   },
+   "domparser": {
+    "bar": "undefined",
+    "foo": "undefined",
+    "inFoo": false,
+    "ownNames": []
+   },
+   "parseHTMLUnsafe": {
+    "bar": "undefined",
+    "foo": "undefined",
+    "inFoo": false,
+    "ownNames": []
+   },
+   "top": "[object HTMLImageElement]",
+   "ua": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:162.0) Gecko/20100101 Firefox/162.0",
+   "xhr": {
+    "bar": "undefined",
+    "foo": "undefined",
+    "inFoo": false,
+    "ownNames": []
+   }
+  },
+  "counters": [
+   "USE_COUNTER_DOCUMENT: htmldocument_named_getter_hit - http://127.0.0.1:50545/probe.html",
+   "USE_COUNTER_DOCUMENT: htmldocument_named_getter_hit_no_window - http://127.0.0.1:50545/probe.html"
+  ]
+ }
+}

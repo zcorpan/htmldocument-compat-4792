@@ -1,0 +1,137 @@
+diff --git a/dom/base/UseCounters.conf b/dom/base/UseCounters.conf
+index 65b3e0a09685..f1d52eaed45a 100644
+--- a/dom/base/UseCounters.conf
++++ b/dom/base/UseCounters.conf
+@@ -117,6 +117,7 @@ custom DocumentOpen calls document.open in a way that creates a new Window objec
+ 
+ // HTMLDocument named getter
+ custom HTMLDocumentNamedGetterHit calls to the named getter on HTMLDocument that find something via the name lookup
++custom HTMLDocumentNamedGetterHitNoWindow calls to the named getter on an HTMLDocument without a window (e.g. from DOMParser) that find something via the name lookup, counted on the document of its global
+ 
+ custom FilteredCrossOriginIFrame cross-origin <iframe> within a CSS/SVG filter
+ 
+diff --git a/dom/base/use_counter_metrics.yaml b/dom/base/use_counter_metrics.yaml
+index 1e16e0f1c80d..80eafaa562e6 100644
+--- a/dom/base/use_counter_metrics.yaml
++++ b/dom/base/use_counter_metrics.yaml
+@@ -108,8 +108,8 @@ use.counter:
+     send_in_pings:
+       - use-counters
+ 
+-# Total of 2694 use counter metrics (excludes denominators).
+-# Total of 441 'page' use counters.
++# Total of 2696 use counter metrics (excludes denominators).
++# Total of 442 'page' use counters.
+ use.counter.page:
+   svgsvgelement_getelementbyid:
+     type: counter
+@@ -1233,6 +1233,23 @@ use.counter.page:
+     send_in_pings:
+       - use-counters
+ 
++  htmldocument_named_getter_hit_no_window:
++    type: counter
++    description: >
++      Whether a page calls to the named getter on an HTMLDocument without a window (e.g. from DOMParser) that find something via the name lookup, counted on the document of its global.
++      Compare against `use.counter.top_level_content_documents_destroyed`
++      to calculate the rate.
++    bugs:
++      - https://bugzilla.mozilla.org/show_bug.cgi?id=1852098
++    data_reviews:
++      - https://bugzilla.mozilla.org/show_bug.cgi?id=1852098
++    notification_emails:
++      - dom-core@mozilla.com
++      - emilio@mozilla.com
++    expires: never
++    send_in_pings:
++      - use-counters
++
+   filtered_cross_origin_iframe:
+     type: counter
+     description: >
+@@ -7608,7 +7625,7 @@ use.counter.page:
+     send_in_pings:
+       - use-counters
+ 
+-# Total of 441 'document' use counters.
++# Total of 442 'document' use counters.
+ use.counter.doc:
+   svgsvgelement_getelementbyid:
+     type: counter
+@@ -8732,6 +8749,23 @@ use.counter.doc:
+     send_in_pings:
+       - use-counters
+ 
++  htmldocument_named_getter_hit_no_window:
++    type: counter
++    description: >
++      Whether a document calls to the named getter on an HTMLDocument without a window (e.g. from DOMParser) that find something via the name lookup, counted on the document of its global.
++      Compare against `use.counter.content_documents_destroyed`
++      to calculate the rate.
++    bugs:
++      - https://bugzilla.mozilla.org/show_bug.cgi?id=1852098
++    data_reviews:
++      - https://bugzilla.mozilla.org/show_bug.cgi?id=1852098
++    notification_emails:
++      - dom-core@mozilla.com
++      - emilio@mozilla.com
++    expires: never
++    send_in_pings:
++      - use-counters
++
+   filtered_cross_origin_iframe:
+     type: counter
+     description: >
+diff --git a/dom/html/nsHTMLDocument.cpp b/dom/html/nsHTMLDocument.cpp
+index 3a7427d75246..2080472cd1e4 100644
+--- a/dom/html/nsHTMLDocument.cpp
++++ b/dom/html/nsHTMLDocument.cpp
+@@ -625,12 +625,30 @@ void nsHTMLDocument::NamedGetter(JSContext* aCx, const nsAString& aName,
+   }
+ #endif
+ 
++  if (!mWindow) {
++    if (nsIGlobalObject* global = GetScopeObject()) {
++      if (nsPIDOMWindowInner* win = global->GetAsInnerWindow()) {
++        if (Document* doc = win->GetExtantDoc()) {
++          doc->SetUseCounter(
++              mozilla::eUseCounter_custom_HTMLDocumentNamedGetterHitNoWindow);
++        }
++      }
++    }
++    if (!StaticPrefs::dom_document_named_getter_without_window_enabled()) {
++      return;
++    }
++  }
++
+   SetUseCounter(mozilla::eUseCounter_custom_HTMLDocumentNamedGetterHit);
+   aFound = true;
+   aRetVal.set(&v.toObject());
+ }
+ 
+ void nsHTMLDocument::GetSupportedNames(nsTArray<nsString>& aNames) {
++  if (!mWindow &&
++      !StaticPrefs::dom_document_named_getter_without_window_enabled()) {
++    return;
++  }
+   for (const auto& entry : mIdentifierMap) {
+     if (entry.HasDocumentNameElement()) {
+       aNames.AppendElement(entry.GetKeyAsString());
+diff --git a/modules/libpref/init/StaticPrefList.yaml b/modules/libpref/init/StaticPrefList.yaml
+index d5ad87d5bce9..b0c56539e929 100644
+--- a/modules/libpref/init/StaticPrefList.yaml
++++ b/modules/libpref/init/StaticPrefList.yaml
+@@ -6645,6 +6645,13 @@
+   value: @IS_NIGHTLY_BUILD@
+   mirror: always
+ 
++# Whether the named getter on HTMLDocument works on documents without a window
++# (e.g. from DOMParser, XHR or createHTMLDocument()).
++- name: dom.document.named_getter_without_window.enabled
++  type: RelaxedAtomicBool
++  value: true
++  mirror: always
++
+ # Whether to enable about:blank async-load workaround for ckeditor.
+ - name: dom.about-blank-ckeditor-hack.enabled
+   type: bool

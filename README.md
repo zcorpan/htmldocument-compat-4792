@@ -74,6 +74,12 @@ Chrome and Safari give neither. Traced on the 683 XHTML URLs in the crawl (618 s
 XHTML in Firefox Nightly, 880 visits in Chrome Canary), scripts read such a name on 3 pages, and
 none of the reads changes what the script does.
 
+Dropping `document.foo` from HTML documents without a browsing context (DOMParser, XHR,
+`createHTMLDocument()`, `parseHTMLUnsafe()`), as Chrome already lacks it there, looks compatible
+for Firefox (section 5). With a new use counter in a local Firefox build, no page in 2,000 random
+desktop root pages read a named element from such a document (95% upper bound 0.15%), while 260 of
+them parse HTML with DOMParser.
+
 ## Scope
 
 - HTTP Archive crawl 2026-10-01, both clients; Common Crawl CC-MAIN-2026-39 (12 local WARCs, seed
@@ -199,7 +205,8 @@ trace leaves those alone; 70 of the 618 pages had a document-named element.
   named getter) and window named access to windows whose document is an HTML document.
 - Chrome alone lacks `document.foo` in HTML documents without a browsing context (DOMParser, XHR,
   `createHTMLDocument()`, `parseHTMLUnsafe()`); Firefox and Safari have it, which an `HTMLDocument`
-  named getter matches. This is the Chromium bug whatwg/html#4792 links (594008).
+  named getter matches. This is the Chromium bug whatwg/html#4792 links (594008). Dropping it in
+  Firefox too looks compatible (section 5).
 - Firefox drops an iframe's `name` from its browsing context in every XML-parsed document (XHTML,
   XML, SVG): `window.<iframe name>` is undefined there, while Chrome and Safari return its window.
   That's a Firefox bug either way.
@@ -214,6 +221,47 @@ trace leaves those alone; 70 of the 618 pages had a document-named element.
   motivation is met without the alias. whatwg/html#4792 (Boris Zbarsky, 2019) proposed bringing
   back `HTMLDocument` with the named getter, because named properties on XML documents (with
   `[LegacyOverrideBuiltIns]`) would be a compat risk.
+
+## 5. Named getter on HTML documents without a browsing context
+
+Chrome Canary 159 has no `document.foo` on HTML documents without a browsing context (DOMParser
+text/html, XHR text/html, `createHTMLDocument()`, `parseHTMLUnsafe()`); Firefox Nightly 162 and
+Safari TP 255 have it ([browsers.md](browsers.md#all-three-browsers-including-safari-tp)). Blink
+adds a document's named items through its window
+([html_document.cc](https://github.com/chromium/chromium/blob/6ca4e60b94475fa916dfb688608e6cc72693a1bf/third_party/blink/renderer/core/html/html_document.cc#L96-L105)),
+so a document without one never gets any.
+
+Firefox's `HTMLDocumentNamedGetterHit` counter can't tell whether pages rely on it: only documents
+created for a window report use counters, so hits on these documents are lost. A local Firefox
+build ([patch](firefox/named-getter-no-window.patch), on mozilla/firefox 47f2a88cbab9) adds:
+
+- a use counter, `HTMLDocumentNamedGetterHitNoWindow`, set on the document of the creating global
+  when the named getter finds something on a document that never had a window;
+- a pref, `dom.document.named_getter_without_window.enabled` (default on), that empties the named
+  getter and its supported names on those documents.
+
+On a local page ([tests/nowindow](tests/nowindow/probe.html),
+[results](tests/nowindow-probe-results.json)) which reads a named element from each of the
+four kinds of document, the counter fires with the pref on or off, and with the pref off `doc.foo` is undefined, `'foo' in doc` false, and
+no names are own properties.
+
+Detection ran on 2,000 random desktop root pages from the 2026-10-01 crawl
+([query](queries/random_desktop_nowindow.sql), the first 2,000 of 5,000 seeded rows). Each page
+loaded in its own tab with `dom.use_counters.dump.document` on and closed 4 s after load; the
+counter lines its documents printed are in [detect.jsonl](out-nowindow/detect.jsonl), with URLs
+cut to origins (`idx` is the row in [the query's CSV](queries/random_desktop_nowindow.csv)).
+
+| Counter | Pages |
+|---|---|
+| `htmldocument_named_getter_hit_no_window` | 0 |
+| `domparser_parsefromstring` | 260 |
+| `htmldocument_named_getter_hit` (the page's own document) | 3 |
+
+So no page read a named element from a document without a window (95% upper bound 0.15% of
+desktop root pages), though 13% of them create one with DOMParser, and more with
+`createHTMLDocument()` (jQuery calls it at load; Gecko has no counter for it). 54 pages timed out
+or failed to load; their counters up to that point are included. With no hits there was nothing to
+compare with the pref off.
 
 ## Not covered
 
@@ -230,6 +278,8 @@ trace leaves those alone; 70 of the 618 pages had a document-named element.
 - Firefox wasn't run on the XHTML sample, for candidate 1 or 3: it already ships candidate 1, B1
   found nothing to confirm, and the Chrome trace stands in for candidate 3. So Firefox-only page
   code (UA- or Gecko-sniffed branches) and Firefox extensions on XHTML pages weren't observed.
+- Named getter without a browsing context: reads after load plus 4 s or on interaction, logged-in
+  pages, Firefox-only page code beyond what the random sample ran, mobile, and Safari TP.
 - Live pages change, so reruns won't match exactly. Some XHTML-stratum pages now serve text/html.
 
 ## Query bytes
@@ -245,6 +295,7 @@ All on the 2026-10-01 crawl (or the 10k sample tables), run on 2026-11-07:
 | [bodies_10k.sql](queries/bodies_10k.sql) | 0.152 |
 | [random_root.sql](queries/random_root.sql) | 0.0008 |
 | [libs.sql](queries/libs.sql) | 0.329 |
+| [random_desktop_nowindow.sql](queries/random_desktop_nowindow.sql) (2026-11-10) | 0.0006 |
 
 ## Reproduce
 
@@ -264,6 +315,9 @@ CHANGE_VARIANT=N .venv/bin/python detect_chrome.py "$CHROME" crawl/samples/xhtml
 .venv/bin/python detect_firefox.py crawl/samples/xhtml-all.jsonl out-named/detect-firefox.jsonl 5
 .venv/bin/python named_summary.py out-named/detect-chrome.jsonl out-named/detect-firefox.jsonl > out-named/detect-groups.csv
 CHANGE_VARIANT=N .venv/bin/python compare.py "$CHROME" crawl/samples/named-hits.jsonl out-named-chrome && CHANGE_VARIANT=N .venv/bin/python analyze.py out-named-chrome
+# Firefox built with firefox/named-getter-no-window.patch ($FX_BUILD: its dist/Nightly.app/Contents/MacOS/firefox)
+.venv/bin/python tests/nowindow_probe.py "$FX_BUILD"
+head -2001 queries/random_desktop_nowindow.csv > /tmp/2000.csv && .venv/bin/python detect_nowindow.py "$FX_BUILD" /tmp/2000.csv out-nowindow/detect.jsonl 8
 ```
 
 Playwright 1.64.1, Chrome Canary 159.0.8145.0. Partway through the B1 XML run, `compare.py` was

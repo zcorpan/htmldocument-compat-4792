@@ -1,0 +1,28 @@
+<!doctype html>
+<title>named getter on documents without a window</title>
+<img name=top>
+<script>
+const markup = '<!doctype html><title>x</title><form name=foo></form><img name=bar><img name=bar>';
+const read = d => ({
+  foo: d.foo === undefined ? 'undefined' : String(d.foo),
+  bar: d.bar === undefined ? 'undefined' : d.bar.constructor.name + '(' + d.bar.length + ')',
+  inFoo: 'foo' in d,
+  ownNames: Object.getOwnPropertyNames(d).filter(n => n == 'foo' || n == 'bar'),
+});
+(async () => {
+  const r = {ua: navigator.userAgent, top: String(document.top)};
+  r.domparser = read(new DOMParser().parseFromString(markup, 'text/html'));
+  const h = document.implementation.createHTMLDocument('x');
+  h.body.innerHTML = markup;
+  r.createHTMLDocument = read(h);
+  if (Document.parseHTMLUnsafe) r.parseHTMLUnsafe = read(Document.parseHTMLUnsafe(markup));
+  r.xhr = await new Promise(res => {
+    const x = new XMLHttpRequest();
+    x.open('GET', 'doc.html');
+    x.responseType = 'document';
+    x.onload = () => res(read(x.response));
+    x.send();
+  });
+  window.__probe = r;
+})();
+</script>
