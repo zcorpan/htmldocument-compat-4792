@@ -17,12 +17,15 @@ The data seem to support Firefox adopting the Chrome/Safari model, with the spec
 
 | Change | Browsers that change | Pages checked (HTTP Archive 2026-10-01) | Worse |
 |---|---|---|---|
-| Navigated XHTML as `XMLDocument` (candidate 3) | Firefox | 300 XML-typed root pages (150 XHTML), A/B in Chrome | 0 |
-| No named access in XHTML documents (section 3) | Firefox | 683 XHTML URLs, traced in Firefox Nightly and Chrome Canary | 0 |
-| No `document.foo` without a browsing context (section 4) | Firefox, Safari | 2,000 random desktop root pages, use counter in a Firefox build | 0 (no reads) |
-| `HTMLDocument` as an alias of `Document`, as the spec reads (candidate 2) | Firefox, Chrome, Safari | 500 random mobile root pages | 0 (≤0.84%) |
-| | | 155 pages with risky code patterns | 15 |
-| Navigated XHTML as `HTMLDocument` (candidate 1) | Chrome, Safari | 300 XML-typed root pages (150 XHTML) | 0 |
+| Navigated XHTML as `XMLDocument` (candidate 3) | Firefox | 300 XML-typed root pages (150 XHTML), A/B in Chrome | 0 (≤2.9% of XHTML root pages) |
+| No named access in XHTML documents (section 3) | Firefox | 683 XHTML URLs, traced in Firefox Nightly and Chrome Canary | 0 (≤0.6% of XHTML pages) |
+| No `document.foo` without a browsing context (section 4) | Firefox, Safari | 2,000 random desktop root pages, use counter in a Firefox build | 0 reads (≤0.18% of desktop root pages) |
+| `HTMLDocument` as an alias of `Document`, as the spec reads (candidate 2) | Firefox, Chrome, Safari | 500 random mobile root pages | 0 (≤0.84% of mobile root pages) |
+| | | 155 pages with risky code patterns | 15 (insuit, on 0.0034% of mobile root pages) |
+| Navigated XHTML as `HTMLDocument` (candidate 1) | Chrome, Safari | 300 XML-typed root pages (150 XHTML) | 0 (≤2.9% of XHTML root pages) |
+
+≤ marks 95% upper bounds (Clopper–Pearson) over the pages that could be assessed: 125 XHTML
+pages in the XML-typed sample, 618 XHTML pages in Firefox, 2,000 and 435 random pages.
 
 The candidates for the interfaces:
 
@@ -183,8 +186,8 @@ work there. Details and source links: [browsers.md](browsers.md#named-access-on-
 
 A/B in Chrome on these 3 pages (A, A2 plain, B with Firefox's named access;
 [review](out-named-chrome/review.csv)): no visible change on any. So neither direction shows
-breakage: 0 of 618 XHTML pages in Firefox and 0 of 880 visits in Chrome (95% upper bound about
-0.5% of XHTML pages). Document named reads (as opposed to window and bare ones) are traced in
+breakage: 0 of 618 XHTML pages in Firefox and 0 of 880 visits in Chrome (95% upper bound 0.6%
+of XHTML pages). Document named reads (as opposed to window and bare ones) are traced in
 Chrome only: Firefox reports a current named element as an own property of `document`, so the
 trace leaves those alone; 70 of the 618 pages had a document-named element.
 
@@ -222,7 +225,7 @@ cut to origins (`idx` is the row in [the query's CSV](queries/random_desktop_now
 | `domparser_parsefromstring` | 260 |
 | `htmldocument_named_getter_hit` (the page's own document) | 3 |
 
-So no page read a named element from a document without a window (95% upper bound 0.15% of
+So no page read a named element from a document without a window (95% upper bound 0.18% of
 desktop root pages), though 13% of them create one with DOMParser, and more with
 `createHTMLDocument()` (jQuery calls it at load; Gecko has no counter for it). 54 pages timed out
 or failed to load; their counters up to that point are included. With no hits there was nothing to
