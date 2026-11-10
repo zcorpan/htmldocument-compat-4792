@@ -13,13 +13,13 @@ The data seem to support Firefox adopting the Chrome/Safari model, with the spec
   documents, XHTML included (candidate 3 below);
 - named access only in HTML documents, so not in XHTML, XML or SVG documents;
 - maybe no `document.foo` in HTML documents without a browsing context, which Chrome already
-  lacks.
+  lacks. The crawl data can't settle this one (section 4).
 
 | Change | Browsers that change | Pages checked (HTTP Archive 2026-10-01) | Worse |
 |---|---|---|---|
 | Navigated XHTML as `XMLDocument` (candidate 3) | Firefox | 300 XML-typed root pages (150 XHTML), A/B in Chrome | 0 (≤2.9% of XHTML root pages) |
 | No named access in XHTML documents (section 3) | Firefox | 683 XHTML URLs, traced in Firefox Nightly and Chrome Canary | 0 (≤0.6% of XHTML pages) |
-| No `document.foo` without a browsing context (section 4) | Firefox, Safari | 2,000 random desktop root pages, use counter in a Firefox build | 0 reads (≤0.18% of desktop root pages) |
+| No `document.foo` without a browsing context (section 4) | Firefox, Safari | 2,000 random desktop root pages, use counter in a Firefox build | 0 reads (≤0.18% of desktop root pages, not conclusive) |
 | `HTMLDocument` as an alias of `Document`, as the spec reads (candidate 2) | Firefox, Chrome, Safari | 500 random mobile root pages | 0 (≤0.84% of mobile root pages) |
 | | | 155 pages with risky code patterns | 15 (insuit, on 0.0034% of mobile root pages) |
 | Navigated XHTML as `HTMLDocument` (candidate 1) | Chrome, Safari | 300 XML-typed root pages (150 XHTML) | 0 (≤2.9% of XHTML root pages) |
@@ -230,6 +230,15 @@ desktop root pages), though 13% of them create one with DOMParser, and more with
 `createHTMLDocument()` (jQuery calls it at load; Gecko has no counter for it). 54 pages timed out
 or failed to load; their counters up to that point are included. With no hits there was nothing to
 compare with the pref off.
+
+That bound is too coarse to call the change compatible: a browser change breaking 0.01% of pages
+can matter. Nothing finds the pages that rely on the getter: the name read depends on the parsed
+markup, so there's no code pattern to search for; the crawl runs Chrome, which lacks the getter, so
+no Blink counter fires; and pages creating such documents are at least 13% of the web, so limiting
+to them is barely narrower than a random sample. A Chrome use counter for named lookups that would
+find an element on such a document would allow a targeted query once it reaches a crawl. Evidence
+from elsewhere: Chrome has shipped without the getter here for about 10 years, and
+https://crbug.com/594008 (filed by Boris Zbarsky) had 7 stars and no duplicates on 2026-11-10.
 
 ## 5. Other checks for Firefox adopting the Chrome/Safari model
 
