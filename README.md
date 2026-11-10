@@ -1,7 +1,30 @@
 # Compat impact of the document interfaces in whatwg/html#4792
 
-Three candidates for the interfaces (named access such as `document.foo` is in
-[section 3](#3-named-access-on-xhtml-documentfoo-windowfoo)):
+Firefox Nightly 162, Chrome Canary 159 and Safari TP 255 differ from the spec, and Firefox from the
+other two, in which interface a document gets and which documents have named access
+(`document.foo`, `window.foo`): [browsers.md](browsers.md). Chrome Canary and Safari TP match on
+every probe.
+
+## Summary
+
+The data seem to support Firefox adopting the Chrome/Safari model, with the spec updated to match:
+
+- `HTMLDocument`, with the named getter, for HTML documents, and `XMLDocument` for navigated XML
+  documents, XHTML included (candidate 3 below);
+- named access only in HTML documents, so not in XHTML, XML or SVG documents;
+- maybe no `document.foo` in HTML documents without a browsing context, which Chrome already
+  lacks.
+
+| Change | Browsers that change | Pages checked (HTTP Archive 2026-10-01) | Worse |
+|---|---|---|---|
+| Navigated XHTML as `XMLDocument` (candidate 3) | Firefox | 300 XML-typed root pages (150 XHTML), A/B in Chrome | 0 |
+| No named access in XHTML documents (section 3) | Firefox | 683 XHTML URLs, traced in Firefox Nightly and Chrome Canary | 0 |
+| No `document.foo` without a browsing context (section 4) | Firefox, Safari | 2,000 random desktop root pages, use counter in a Firefox build | 0 (no reads) |
+| `HTMLDocument` as an alias of `Document`, as the spec reads (candidate 2) | Firefox, Chrome, Safari | 500 random mobile root pages | 0 (≤0.84%) |
+| | | 155 pages with risky code patterns | 15 |
+| Navigated XHTML as `HTMLDocument` (candidate 1) | Chrome, Safari | 300 XML-typed root pages (150 XHTML) | 0 |
+
+The candidates for the interfaces:
 
 1. Chrome and Safari make navigated `application/xhtml+xml` documents `HTMLDocument`, as Firefox
    does. Today they are `XMLDocument`.
@@ -14,29 +37,24 @@ Three candidates for the interfaces (named access such as `document.foo` is in
 3. Firefox makes navigated XHTML documents `XMLDocument`, as Chrome and Safari do (the reverse of
    1).
 
-Current behavior per document type, in the spec, Firefox Nightly 162 and Chrome Canary 159:
-[browsers.md](browsers.md). The two browsers differ only for navigated XHTML documents: in the
-interface, and in named access (`document.foo`, `window.foo`), which Firefox has there and Chrome
-doesn't.
-
-## Summary
-
-Candidates 1 and 3 each make the browsers match on XHTML; neither breaks pages as far as I can
-tell. Candidate 3 needs changes to Firefox's own features.
-
-Candidate 1 looks safe. XHTML is rare: 326 mobile and 270 desktop root pages in HTTP Archive serve
-it (0.002% of mobile root pages), and 16 of 256,012 HTML responses in Common Crawl. On 300 sampled
-XML-typed root pages (150 XHTML), emulating candidate 1 in Chrome changed nothing visible. Only 8
-pages had scripts read a value that changes, all through generic jQuery or Prototype.js type
-helpers that return the same result either way.
+Candidate 3 is the B1 run's diff reversed: none of the 248 assessable XML-typed pages differed
+visibly between `HTMLDocument` and `XMLDocument` for XHTML, and the only reads that change (8 pages,
+jQuery `type()` and Prototype.js `Object.isString`) return the same result for either tag. The 10k
+sample has no XHTML subframes. What would break is Firefox's own: Reader View is offered only when
+`HTMLDocument.isInstance(doc)`
+([Readerable.js](https://github.com/mozilla-firefox/firefox/blob/b16e2e7707150c623c413326c14c5111f930e920/toolkit/components/reader/Readerable.js#L31),
+[AboutReaderChild.sys.mjs](https://github.com/mozilla-firefox/firefox/blob/b16e2e7707150c623c413326c14c5111f930e920/browser/actors/AboutReaderChild.sys.mjs#L168)),
+and thumbnails skip `XMLDocument`s
+([PageThumbUtils.sys.mjs](https://github.com/mozilla-firefox/firefox/blob/b16e2e7707150c623c413326c14c5111f930e920/toolkit/components/thumbnails/PageThumbUtils.sys.mjs#L351)),
+so XHTML pages would lose both unless those checks change. Page code that only runs in Firefox, and
+Firefox extensions, weren't traced.
 
 Candidate 2 breaks a few widgets that name-check the document. Exposure is broad: 6,697 of 24,580
 pages in the HTTP Archive 10k sample mention `HTMLDocument`, `XMLDocument` or an
 `[object …Document]` tag in a response body. In the 500 random mobile root pages, 165 of 451
-traced pages had scripts read a value that changes. Code review found none of those reads
-user-facing (at least 32 pages have invisible effects such as bot-detection signals; the rest
-behave the same). Nothing changed visibly: 0 worse of 435 assessable pages (95% upper bound 0.84%
-of mobile root pages). Targeted loads of risky code found:
+traced pages had scripts read a value that changes, but code review found none of those reads
+user-facing, and nothing changed visibly (0 worse of 435 assessable pages). Targeted loads of risky
+code found:
 
 - insuit accessibility widget, on 526 mobile and 490 desktop root pages (mostly Spanish government
   sites: Seguridad Social, SEPE, Ministerio de Justicia). It maps toString tags to types and lists
@@ -51,42 +69,22 @@ of mobile root pages). Targeted loads of risky code found:
   "Document" case. In the 10k sample only Adobe's checkout chunks carry it, and they didn't run at
   page load.
 
-These follow from the spec text, not from an implementation bug: fixing them in the spec means
-keeping a distinct `HTMLDocument` interface (tag and name) for HTML documents, as whatwg/html#4792
-proposes. Keeping `HTMLDocument` for text/html avoids all three breakages. Candidate 1 alone is enough to
-make Chrome and Safari match Firefox.
+These follow from the spec text, not from an implementation bug. Keeping a distinct `HTMLDocument`
+interface (tag and name) for HTML documents, as whatwg/html#4792 proposes, avoids all three. The
+alias came from W3C bug 14037 (2011) and was never implemented; the members it was meant to share
+now live on `Document` (section 5).
 
-Candidate 3 also looks web-compatible. It is the same diff as the B1 run, reversed: Chrome and Safari
-already give XHTML pages `XMLDocument`, none of the 248 assessable XML-typed pages in that run (150
-sampled were XHTML) differed visibly between the two, and the only reads that change (8 pages, jQuery `type()` and Prototype.js
-`Object.isString`) return the same result for either tag. The 10k sample has no XHTML subframes.
-What would break is Firefox's own: Reader View is offered only when `HTMLDocument.isInstance(doc)`
-([Readerable.js](https://github.com/mozilla-firefox/firefox/blob/b16e2e7707150c623c413326c14c5111f930e920/toolkit/components/reader/Readerable.js#L31),
-[AboutReaderChild.sys.mjs](https://github.com/mozilla-firefox/firefox/blob/b16e2e7707150c623c413326c14c5111f930e920/browser/actors/AboutReaderChild.sys.mjs#L168)), and thumbnails skip
-`XMLDocument`s ([PageThumbUtils.sys.mjs](https://github.com/mozilla-firefox/firefox/blob/b16e2e7707150c623c413326c14c5111f930e920/toolkit/components/thumbnails/PageThumbUtils.sys.mjs#L351)),
-so XHTML pages would lose both unless those checks change. XHTML documents would also lose
-`HTMLDocument`'s named getter (out of scope here; Chrome and Safari lack it on XHTML too). Page
-code that only runs in Firefox, and Firefox extensions, weren't traced.
-
-Named access on XHTML (section 3) looks safe to change in either direction. Firefox gives navigated
-XHTML documents `document.foo` and `window.foo` for named elements and ids, as the spec does;
-Chrome and Safari give neither. Traced on the 683 XHTML URLs in the crawl (618 still served as
-XHTML in Firefox Nightly, 880 visits in Chrome Canary), scripts read such a name on 3 pages, and
-none of the reads changes what the script does.
-
-Dropping `document.foo` from HTML documents without a browsing context (DOMParser, XHR,
-`createHTMLDocument()`, `parseHTMLUnsafe()`), as Chrome already lacks it there, looks compatible
-for Firefox (section 5). With a new use counter in a local Firefox build, no page in 2,000 random
-desktop root pages read a named element from such a document (95% upper bound 0.15%), while 260 of
-them parse HTML with DOMParser.
+Candidate 1 also looks safe. XHTML is rare: 326 mobile and 270 desktop root pages in HTTP Archive
+serve it (0.002% of mobile root pages), and 16 of 256,012 HTML responses in Common Crawl. On 300
+sampled XML-typed root pages, emulating candidate 1 in Chrome changed nothing visible.
 
 ## Scope
 
 - HTTP Archive crawl 2026-10-01, both clients; Common Crawl CC-MAIN-2026-39 (12 local WARCs, seed
   11397) for inline markup. Budget 2 TiB of queries for the whole run.
-- Browsers: Chrome Canary 159 (crawl-like mobile emulation, desktop for desktop pages) for live
-  runs; Firefox Nightly 162 and Chrome Canary for current behavior. Safari TP skipped (matches
-  Canary).
+- Browsers: Chrome Canary 159 for the interface A/B runs (crawl-like mobile emulation, desktop for
+  desktop pages); Firefox Nightly 162 and Chrome Canary for named access on XHTML; a local Firefox
+  build for the named getter without a browsing context; Safari TP 255 for probes only.
 - Setups (`change.py`): A and A2 unmodified, with `trace.js` in all frames recording each script
   observation of the document interface plus the value it would get under each candidate. B1
   (`emulate.js`, candidate 1) gives navigated XHTML documents `HTMLDocument.prototype`. B2
@@ -94,7 +92,8 @@ them parse HTML with DOMParser.
   Document`, and re-prototypes HTML documents from DOMParser, XHR, `createHTMLDocument()`,
   `parseHTMLUnsafe()` and frames. The sanity check (`sanity/index.html`) confirms each.
 - Samples: root pages whose main document is XML-typed (cap 300); pages with XML-typed subframe
-  documents; 500 random root pages; 10k-sample pages hitting risky code patterns. Run to the end.
+  documents; 500 random root pages; 10k-sample pages hitting risky code patterns; every XHTML
+  main document (section 3); 2,000 random desktop root pages (section 4). Run to the end.
 
 ## 1. Crawl data
 
@@ -157,17 +156,11 @@ In navigated XHTML documents Firefox has `document.foo` for named elements (`for
 as the spec says for every `Document`. Chrome and Safari tie both to their `HTMLDocument` class,
 so XHTML documents get `undefined` (and a `ReferenceError` for bare `foo`); only iframes by name
 work there. Details and source links: [browsers.md](browsers.md#named-access-on-navigated-xhtml-documents).
-A side finding: in Firefox an XHTML iframe's `name` isn't on its browsing context at first
-(`frames[0].name` stays `""` for an `about:blank` iframe), so `window.<iframe name>` gives the
-iframe element or `undefined` instead of its window.
 
-Two directions: Chrome and Safari add named access to XHTML (the spec), or Firefox drops it.
-
-- No local data covers this: whatwg/html#10687's research (`~/git/zcorpan/document-shadowing-compat-10687`)
-  has no XHTML pages (Chrome's counter there can't fire on XHTML and its Common Crawl scan was
-  text/html only), and none of the 16 Common Crawl XHTML responses has inline script reading a
-  named element ([cc_named.jsonl](crawl/cc_named.jsonl), `cc_named.py`). Crawl response bodies
-  would cost about 106 TiB for mobile alone, so no new query was run.
+- No earlier data covers XHTML: whatwg/html#10687's research has none, and none of the 16 Common
+  Crawl XHTML responses has inline script reading a named element
+  ([cc_named.jsonl](crawl/cc_named.jsonl)). Crawl response bodies would cost about 106 TiB for
+  mobile alone, so no new query was run.
 - `named.js` traces reads of names that named elements provide. In Chrome ('emulate' mode) it adds
   Firefox's named access, so Chrome code paths see the elements and their reads are logged; in
   Firefox ('trace' mode) it logs window and bare reads with Firefox's own values. Both were checked
@@ -195,41 +188,13 @@ breakage: 0 of 618 XHTML pages in Firefox and 0 of 880 visits in Chrome (95% upp
 Chrome only: Firefox reports a current named element as an own property of `document`, so the
 trace leaves those alone; 70 of the 618 pages had a document-named element.
 
-## 4. Checks for Firefox adopting the Chrome/Safari model
+## 4. Named getter on HTML documents without a browsing context
 
-- Safari TP 255 matches Chrome Canary 159 on every interface and named access probe
-  ([browsers.md](browsers.md#all-three-browsers-including-safari-tp)), so Chrome and Safari share
-  one model.
-- No browser has named access in XML or SVG documents, though the spec gives it to every
-  `Document`. The spec would need to limit `document.foo` to HTML documents (an `HTMLDocument`
-  named getter) and window named access to windows whose document is an HTML document.
-- Chrome alone lacks `document.foo` in HTML documents without a browsing context (DOMParser, XHR,
-  `createHTMLDocument()`, `parseHTMLUnsafe()`); Firefox and Safari have it, which an `HTMLDocument`
-  named getter matches. This is the Chromium bug whatwg/html#4792 links (594008). Dropping it in
-  Firefox too looks compatible (section 5).
-- Firefox drops an iframe's `name` from its browsing context in every XML-parsed document (XHTML,
-  XML, SVG): `window.<iframe name>` is undefined there, while Chrome and Safari return its window.
-  That's a Firefox bug either way.
-- History: from Web Apps 1.0's first check-in (2006) every `Document` had to implement
-  `HTMLDocument`, through binding-specific casting, so its members (`title`, `cookie`, the named
-  getter) would work in any document, SVG and XML included. W3C bug 14037 (2011, about
-  `XMLDocument` and Sarissa's `XMLDocument.prototype.load` hook) turned that into
-  `HTMLDocument === Document`, with `XMLDocument` only from `createDocument()` (commit 83f13eef).
-  Gecko had no plans to implement it, and WebKit preferred navigated `.svg` and `.xhtml`
-  documents to be `XMLDocument`; no browser ever implemented the alias. All former `HTMLDocument`
-  members except the named getter now live on `Document` in all three browsers, so the original
-  motivation is met without the alias. whatwg/html#4792 (Boris Zbarsky, 2019) proposed bringing
-  back `HTMLDocument` with the named getter, because named properties on XML documents (with
-  `[LegacyOverrideBuiltIns]`) would be a compat risk.
-
-## 5. Named getter on HTML documents without a browsing context
-
-Chrome Canary 159 has no `document.foo` on HTML documents without a browsing context (DOMParser
-text/html, XHR text/html, `createHTMLDocument()`, `parseHTMLUnsafe()`); Firefox Nightly 162 and
-Safari TP 255 have it ([browsers.md](browsers.md#all-three-browsers-including-safari-tp)). Blink
-adds a document's named items through its window
-([html_document.cc](https://github.com/chromium/chromium/blob/6ca4e60b94475fa916dfb688608e6cc72693a1bf/third_party/blink/renderer/core/html/html_document.cc#L96-L105)),
-so a document without one never gets any.
+Chrome Canary 159 lacks `document.foo` here because Blink adds a document's named items through
+its window
+([html_document.cc](https://github.com/chromium/chromium/blob/6ca4e60b94475fa916dfb688608e6cc72693a1bf/third_party/blink/renderer/core/html/html_document.cc#L96-L105)).
+Firefox Nightly 162 and Safari TP 255 have it
+([browsers.md](browsers.md#firefox-nightly-chrome-canary-and-safari-tp)).
 
 Firefox's `HTMLDocumentNamedGetterHit` counter can't tell whether pages rely on it: only documents
 created for a window report use counters, so hits on these documents are lost. A local Firefox
@@ -262,6 +227,29 @@ desktop root pages), though 13% of them create one with DOMParser, and more with
 `createHTMLDocument()` (jQuery calls it at load; Gecko has no counter for it). 54 pages timed out
 or failed to load; their counters up to that point are included. With no hits there was nothing to
 compare with the pref off.
+
+## 5. Other checks for Firefox adopting the Chrome/Safari model
+
+- Safari TP 255 matches Chrome Canary 159 on every interface and named access probe
+  ([browsers.md](browsers.md#firefox-nightly-chrome-canary-and-safari-tp)), so Chrome and Safari share
+  one model.
+- No browser has named access in XML or SVG documents, though the spec gives it to every
+  `Document`. The spec would need to limit `document.foo` to HTML documents (an `HTMLDocument`
+  named getter) and window named access to windows whose document is an HTML document.
+- Firefox drops an iframe's `name` from its browsing context in every XML-parsed document (XHTML,
+  XML, SVG): `window.<iframe name>` is undefined there, while Chrome and Safari return its window.
+  That's a Firefox bug either way.
+- History: from Web Apps 1.0's first check-in (2006) every `Document` had to implement
+  `HTMLDocument`, through binding-specific casting, so its members (`title`, `cookie`, the named
+  getter) would work in any document, SVG and XML included. W3C bug 14037 (2011, about
+  `XMLDocument` and Sarissa's `XMLDocument.prototype.load` hook) turned that into
+  `HTMLDocument === Document`, with `XMLDocument` only from `createDocument()` (commit 83f13eef).
+  Gecko had no plans to implement it, and WebKit preferred navigated `.svg` and `.xhtml`
+  documents to be `XMLDocument`; no browser ever implemented the alias. All former `HTMLDocument`
+  members except the named getter now live on `Document` in Firefox Nightly, Chrome Canary and Safari TP, so the original
+  motivation is met without the alias. whatwg/html#4792 (Boris Zbarsky, 2019) proposed bringing
+  back `HTMLDocument` with the named getter, because named properties on XML documents (with
+  `[LegacyOverrideBuiltIns]`) would be a compat risk.
 
 ## Not covered
 

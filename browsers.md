@@ -47,7 +47,7 @@ WebKit [`JSDOMWindowProperties.cpp`](https://github.com/WebKit/WebKit/blob/15cb3
 which navigated XHTML documents aren't; Gecko allows any HTML or XHTML document
 ([`WindowNamedPropertiesHandler.cpp`](https://github.com/mozilla-firefox/firefox/blob/b16e2e7707150c623c413326c14c5111f930e920/dom/base/WindowNamedPropertiesHandler.cpp#L138)).
 
-## All three browsers, including Safari TP
+## Firefox Nightly, Chrome Canary and Safari TP
 
 From `tests/iface/probe.html` (`tests/iface_probe.py`, results in `tests/iface-probe-results.json`),
 2026-11-09: Chrome Canary 159, Firefox Nightly 162, Safari TP 255. Safari TP matches Chrome Canary
