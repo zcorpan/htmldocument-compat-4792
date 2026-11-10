@@ -13,19 +13,22 @@ The data seem to support Firefox adopting the Chrome/Safari model, with the spec
   documents, XHTML included (candidate 3 below);
 - named access only in HTML documents, so not in XHTML, XML or SVG documents;
 - maybe no `document.foo` in HTML documents without a browsing context, which Chrome already
-  lacks. The crawl data can't settle this one (section 4).
+  lacks. The crawl data settle it only for pages using XHR `responseXML` or `parseHTMLUnsafe()`
+  (section 4).
 
 | Change | Browsers that change | Pages checked (HTTP Archive 2026-10-01) | Worse |
 |---|---|---|---|
 | Navigated XHTML as `XMLDocument` (candidate 3) | Firefox | 300 XML-typed root pages (150 XHTML), A/B in Chrome | 0 (≤2.9% of XHTML root pages) |
 | No named access in XHTML documents (section 3) | Firefox | 683 XHTML URLs, traced in Firefox Nightly and Chrome Canary | 0 (≤0.6% of XHTML pages) |
 | No `document.foo` without a browsing context (section 4) | Firefox, Safari | 2,000 random desktop root pages, use counter in a Firefox build | 0 reads (≤0.18% of desktop root pages, not conclusive) |
+| | | 2,000 XHR `responseXML` and 1,000 `parseHTMLUnsafe()` desktop root pages (Blink counters) | 0 reads (≤0.003% and ≤0.0005% of desktop root pages) |
 | `HTMLDocument` as an alias of `Document`, as the spec reads (candidate 2) | Firefox, Chrome, Safari | 500 random mobile root pages | 0 (≤0.84% of mobile root pages) |
 | | | 155 pages with risky code patterns | 15 (insuit, on 0.0034% of mobile root pages) |
 | Navigated XHTML as `HTMLDocument` (candidate 1) | Chrome, Safari | 300 XML-typed root pages (150 XHTML) | 0 (≤2.9% of XHTML root pages) |
 
 ≤ marks 95% upper bounds (Clopper–Pearson) over the pages that could be assessed: 125 XHTML
-pages in the XML-typed sample, 618 XHTML pages in Firefox, 2,000 and 435 random pages.
+pages in the XML-typed sample, 618 XHTML pages in Firefox, 2,000 and 435 random pages, and the
+2,000 and 1,000 counter-stratum pages (scaled to their strata).
 
 The candidates for the interfaces:
 
@@ -232,13 +235,36 @@ or failed to load; their counters up to that point are included. With no hits th
 compare with the pref off.
 
 That bound is too coarse to call the change compatible: a browser change breaking 0.01% of pages
-can matter. Nothing finds the pages that rely on the getter: the name read depends on the parsed
-markup, so there's no code pattern to search for; the crawl runs Chrome, which lacks the getter, so
-no Blink counter fires; and pages creating such documents are at least 13% of the web, so limiting
-to them is barely narrower than a random sample. A Chrome use counter for named lookups that would
-find an element on such a document would allow a targeted query once it reaches a crawl. Evidence
-from elsewhere: Chrome has shipped without the getter here for about 10 years, and
-https://crbug.com/594008 (filed by Boris Zbarsky) had 7 stars and no duplicates on 2026-11-10.
+can matter. No code pattern finds the reads (the name depends on the parsed markup), and no Blink
+counter can fire on them (the crawl runs Chrome, which lacks the getter). Blink counters for
+creating such documents do narrow the pages down
+([nowindow_features.csv](queries/nowindow_features.csv), 2026-10-01 root pages):
+
+| Counter | Desktop | Mobile |
+|---|---|---|
+| `ParseHTMLUnsafe` (4687) | 14,658 | 14,561 |
+| `XMLHttpRequestResponseXML` (2391) | 191,511 | 221,072 |
+| `ParseFromString` (4462) | 1,553,220 | 1,883,544 |
+
+Detection ran the same way on seeded samples of the first two, on desktop
+([query](queries/nowindow_strata.sql), [detect-strata.jsonl](out-nowindow/detect-strata.jsonl)):
+
+| Stratum | Sampled | `..._no_window` hits | 95% upper bound, as a share of desktop root pages |
+|---|---|---|---|
+| `XMLHttpRequestResponseXML` | 2,000 | 0 | ≤353 pages, 0.003% |
+| `ParseHTMLUnsafe` | 1,000 | 0 | ≤54 pages, 0.0005% |
+
+In Firefox, 54 of the `ParseHTMLUnsafe` pages called `parseHTMLUnsafe()` and 889 created DOMParser
+documents, so the sampled pages did create documents without a window there. 29 pages fired the
+plain named-getter counter on their own documents, so the dump kept working. 60 pages timed out or
+failed to load.
+
+So for pages using XHR `responseXML` or `parseHTMLUnsafe()`, dropping the getter looks compatible
+in the crawl's view. `ParseFromString` (13% of desktop root pages) wasn't sampled, and nothing counts
+`createHTMLDocument()` or XHR's `response` with `responseType = "document"`, so those pages are
+covered only by the random sample. Evidence from elsewhere: Chrome has shipped without the getter
+here for about 10 years, and https://crbug.com/594008 (filed by Boris Zbarsky) had 7 stars and no
+duplicates on 2026-11-10.
 
 ## 5. Other checks for Firefox adopting the Chrome/Safari model
 
@@ -279,7 +305,8 @@ https://crbug.com/594008 (filed by Boris Zbarsky) had 7 stars and no duplicates 
   found nothing to confirm, and the Chrome trace stands in for candidate 3. So Firefox-only page
   code (UA- or Gecko-sniffed branches) and Firefox extensions on XHTML pages weren't observed.
 - Named getter without a browsing context: reads after load plus 4 s or on interaction, logged-in
-  pages, Firefox-only page code beyond what the random sample ran, mobile, and Safari TP.
+  pages, Firefox-only page code beyond what the samples ran, pages using only DOMParser,
+  `createHTMLDocument()` or XHR `response` beyond the random sample, mobile, and Safari TP.
 - Live pages change, so reruns won't match exactly. Some XHTML-stratum pages now serve text/html.
 
 ## Query bytes
@@ -296,6 +323,8 @@ All on the 2026-10-01 crawl (or the 10k sample tables), run on 2026-11-07:
 | [random_root.sql](queries/random_root.sql) | 0.0008 |
 | [libs.sql](queries/libs.sql) | 0.329 |
 | [random_desktop_nowindow.sql](queries/random_desktop_nowindow.sql) (2026-11-10) | 0.0006 |
+| [nowindow_features.sql](queries/nowindow_features.sql) (2026-11-10) | 0.304 |
+| [nowindow_strata.sql](queries/nowindow_strata.sql) (2026-11-10) | 0.134 |
 
 ## Reproduce
 
@@ -318,6 +347,7 @@ CHANGE_VARIANT=N .venv/bin/python compare.py "$CHROME" crawl/samples/named-hits.
 # Firefox built with firefox/named-getter-no-window.patch ($FX_BUILD: its dist/Nightly.app/Contents/MacOS/firefox)
 .venv/bin/python tests/nowindow_probe.py "$FX_BUILD"
 head -2001 queries/random_desktop_nowindow.csv > /tmp/2000.csv && .venv/bin/python detect_nowindow.py "$FX_BUILD" /tmp/2000.csv out-nowindow/detect.jsonl 8
+.venv/bin/python detect_nowindow.py "$FX_BUILD" queries/nowindow_strata.csv out-nowindow/detect-strata.jsonl 8
 ```
 
 Playwright 1.64.1, Chrome Canary 159.0.8145.0. Partway through the B1 XML run, `compare.py` was

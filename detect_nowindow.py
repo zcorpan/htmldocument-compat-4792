@@ -70,6 +70,8 @@ def work():
         except queue.Empty:
             break
         rec = {'idx': r['idx'], 'rank': int(r['rank']), 'enabled': enabled}
+        if r.get('stratum'):
+            rec['stratum'] = r['stratum']
         try:
             b.d.switch_to.new_window('tab')
             try:

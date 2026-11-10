@@ -1,0 +1,7 @@
+client,feature,pages
+desktop,ParseFromString,1553220
+desktop,ParseHTMLUnsafe,14658
+desktop,XMLHttpRequestResponseXML,191511
+mobile,ParseFromString,1883544
+mobile,ParseHTMLUnsafe,14561
+mobile,XMLHttpRequestResponseXML,221072
