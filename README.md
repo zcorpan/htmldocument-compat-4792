@@ -277,6 +277,7 @@ duplicates on 2026-11-10.
 
 ## 5. Other checks for Firefox adopting the Chrome/Safari model
 
+- What Gecko would need to change, and what to check: [bug 2091331](https://bugzilla.mozilla.org/show_bug.cgi?id=2091331).
 - Safari TP 255 matches Chrome Canary 159 on every interface and named access probe
   ([browsers.md](browsers.md#firefox-nightly-chrome-canary-and-safari-tp)), so Chrome and Safari share
   one model.
@@ -285,7 +286,7 @@ duplicates on 2026-11-10.
   named getter) and window named access to windows whose document is an HTML document.
 - Firefox drops an iframe's `name` from its browsing context in every XML-parsed document (XHTML,
   XML, SVG): `window.<iframe name>` is undefined there, while Chrome and Safari return its window.
-  That's a Firefox bug either way.
+  That's a Firefox bug either way: [bug 2091332](https://bugzilla.mozilla.org/show_bug.cgi?id=2091332).
 - History: from Web Apps 1.0's first check-in (2006) every `Document` had to implement
   `HTMLDocument`, through binding-specific casting, so its members (`title`, `cookie`, the named
   getter) would work in any document, SVG and XML included. W3C bug 14037 (2011, about

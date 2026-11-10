@@ -37,7 +37,7 @@ From `tests/named.xhtml` and `tests/named.html` (`tests/named_probe.py`, results
 | `document.foo` for `<form name=foo>`, `<img name>`, `<embed name>`, `<object name>` or `<object id>`, `<img id name>`, `<iframe name>` | element (iframe: its window) | same as spec | undefined |
 | `document.title` with `<form name=title>` (named element shadows a `Document` member) | the form | the form (Nightly default: the string) | the string |
 | `window.foo` and bare `foo` for an element with `id=foo` (any namespace), or `<form name>`, `<img name>`, `<embed name>`, `<object name>` | element | same as spec | undefined, and bare `foo` throws a `ReferenceError` |
-| `window.foo` for `<iframe name=foo>` | the iframe's window | undefined (the child browsing context's name stays empty) | the iframe's window |
+| `window.foo` for `<iframe name=foo>` | the iframe's window | undefined (the child browsing context's name stays empty, [bug 2091332](https://bugzilla.mozilla.org/show_bug.cgi?id=2091332)) | the iframe's window |
 
 In text/html documents both browsers follow the spec for all of these, except that Firefox
 Nightly's default doesn't let named elements shadow `Document` members. Chrome's and WebKit's
