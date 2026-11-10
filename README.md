@@ -7,14 +7,18 @@ every probe.
 
 ## Summary
 
-The data seem to support Firefox adopting the Chrome/Safari model, with the spec updated to match:
+Firefox adopting the Chrome/Safari model, with the spec updated to match, seems acceptable. No
+breakage was found, and it makes Firefox match Chrome and Safari TP, an interop gain that would
+justify some breakage anyway. The main caveats: Firefox-only page code and extensions weren't
+traced, and Reader View and thumbnails need their `HTMLDocument` checks changed. The model:
 
 - `HTMLDocument`, with the named getter, for HTML documents, and `XMLDocument` for navigated XML
   documents, XHTML included (candidate 3 below);
 - named access only in HTML documents, so not in XHTML, XML or SVG documents;
 - maybe no `document.foo` in HTML documents without a browsing context, which Chrome already
-  lacks. The crawl data settle it only for pages using XHR `responseXML` or `parseHTMLUnsafe()`
-  (section 4).
+  lacks. This seems acceptable too: Chrome has shipped without it for about 10 years, and the XHR
+  `responseXML` and `parseHTMLUnsafe()` strata had 0 reads. Pages using only DOMParser or
+  `createHTMLDocument()` weren't sampled (section 4).
 
 | Change | Browsers that change | Pages checked (HTTP Archive 2026-10-01) | Worse |
 |---|---|---|---|
@@ -23,7 +27,7 @@ The data seem to support Firefox adopting the Chrome/Safari model, with the spec
 | No `document.foo` without a browsing context (section 4) | Firefox, Safari | 2,000 random desktop root pages, use counter in a Firefox build | 0 reads (≤0.18% of desktop root pages, not conclusive) |
 | | | 2,000 XHR `responseXML` and 1,000 `parseHTMLUnsafe()` desktop root pages (Blink counters) | 0 reads (≤0.003% and ≤0.0005% of desktop root pages) |
 | `HTMLDocument` as an alias of `Document`, as the spec reads (candidate 2) | Firefox, Chrome, Safari | 500 random mobile root pages | 0 (≤0.84% of mobile root pages) |
-| | | 155 pages with risky code patterns | 15 (insuit, on 0.0034% of mobile root pages) |
+| | | 155 pages with risky code patterns | 15 functional (insuit, on 0.0034% of mobile root pages) |
 | Navigated XHTML as `HTMLDocument` (candidate 1) | Chrome, Safari | 300 XML-typed root pages (150 XHTML) | 0 (≤2.9% of XHTML root pages) |
 
 ≤ marks 95% upper bounds (Clopper–Pearson) over the pages that could be assessed: 125 XHTML
@@ -79,6 +83,11 @@ These follow from the spec text, not from an implementation bug. Keeping a disti
 interface (tag and name) for HTML documents, as whatwg/html#4792 proposes, avoids all three. The
 alias came from W3C bug 14037 (2011) and was never implemented; the members it was meant to share
 now live on `Document` (section 5).
+
+The alias model doesn't seem acceptable. Its breakage is functional (an accessibility button, a
+video player, React apps unmounting). insuit alone is on ~0.0034% of mobile root pages, above
+Blink's typical deprecation threshold of 0.001% of page loads (a field usage rate, so only roughly
+comparable), and no interop gain offsets it, since no browser implements the alias.
 
 Candidate 1 also looks safe. XHTML is rare: 326 mobile and 270 desktop root pages in HTTP Archive
 serve it (0.002% of mobile root pages), and 16 of 256,012 HTML responses in Common Crawl. On 300
