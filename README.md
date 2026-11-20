@@ -366,3 +366,9 @@ Playwright 1.64.1, Chrome Canary 159.0.8145.0. Partway through the B1 XML run, `
 changed to relaunch a crashed browser and record that visit as an error (one page crashed it); the
 random run had started with the old version and never needed it.
 Screenshots (`out*/shots/`) aren't committed.
+
+## License
+
+MIT, see [LICENSE](LICENSE), for the scripts, analysis and text written for this research. Content from the crawl and the live web (`queries/`, `crawl/`, screenshots, page snippets) and third-party code (`sanity/vendor/`) belongs to its owners and isn't covered.
+
+Patches are under the license of the code they modify.
