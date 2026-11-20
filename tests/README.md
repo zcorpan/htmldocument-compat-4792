@@ -7,4 +7,5 @@ Results in `../browsers.md`.
 `iframe-name/` has `iframe-name.xhtml` and `iframe-name.xml` (same markup, served as
 `application/xhtml+xml` and `application/xml`): for `<iframe name=x id=y>` they print
 `frames[0].name`, `window.x`/`window.y`, whether `<a target>` navigates the iframe, and what
-`window.open("", name)` returns. Serve the directory over HTTP and load either file.
+`window.open("", name)` returns. Live: [`.xhtml`](https://zcorpan.github.io/htmldocument-compat-4792/tests/iframe-name/iframe-name.xhtml),
+[`.xml`](https://zcorpan.github.io/htmldocument-compat-4792/tests/iframe-name/iframe-name.xml).
